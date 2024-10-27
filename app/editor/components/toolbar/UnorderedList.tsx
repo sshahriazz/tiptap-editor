@@ -1,68 +1,66 @@
-import {
-  Button,
-  ButtonGroup,
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@nextui-org/react";
+import {Button, ButtonGroup, Popover, PopoverContent, PopoverTrigger,} from "@nextui-org/react";
 import React from "react";
-import { EMenuProps } from "../../lib/type";
-import { ChevronDownIcon, ListIcon } from "lucide-react";
-import { useCurrentEditor } from "@tiptap/react";
+import {ChevronDownIcon, ListIcon} from "lucide-react";
+import {useCurrentEditor} from "@tiptap/react";
 
 const UnorderedList = () => {
-  const {
-    editor
-  } = useCurrentEditor()
+    const {
+        editor
+    } = useCurrentEditor()
 
-  if (!editor) {
-    return null;
-  }
-  return (
-    <ButtonGroup>
-      <Button
-      isIconOnly
-      size="sm"
-        onClick={() => editor.chain().focus().toggleBulletList().run()}
-        className={editor.isActive("bulletList") ? "text-primary-500" : ""}
-      >
-        <ListIcon size={16}/>
-      </Button>
-      <Popover classNames={{ content: "py-2" }}>
-        <PopoverTrigger>
-          <Button variant="flat" isIconOnly size="sm" color="primary">
-            <ChevronDownIcon size={16} />
-          </Button>
-        </PopoverTrigger>
-        <PopoverContent className="gap-y-2">
-          <Button
-            onClick={() =>
-              editor.chain().focus().splitListItem("listItem").run()
-            }
-            disabled={!editor.can().splitListItem("listItem")}
-          >
-            Split list item
-          </Button>
-          <Button
-            onClick={() =>
-              editor.chain().focus().sinkListItem("listItem").run()
-            }
-            disabled={!editor.can().sinkListItem("listItem")}
-          >
-            Sink list item
-          </Button>
-          <Button
-            onClick={() =>
-              editor.chain().focus().liftListItem("listItem").run()
-            }
-            disabled={!editor.can().liftListItem("listItem")}
-          >
-            Lift list item
-          </Button>
-        </PopoverContent>
-      </Popover>
-    </ButtonGroup>
-  );
+    if (!editor) {
+        return null;
+    }
+
+    return (
+        <ButtonGroup>
+            <Button
+                isIconOnly
+                size="sm"
+                onClick={() => editor.chain().focus().toggleBulletList().run()}
+                className={editor.isActive("bulletList") ? "text-primary-500" : ""}
+            >
+                <ListIcon size={16}/>
+            </Button>
+            <Popover classNames={{content: "py-2"}}>
+                <PopoverTrigger>
+                    <Button variant="flat" isIconOnly size="sm" color="primary">
+                        <ChevronDownIcon size={16}/>
+                    </Button>
+                </PopoverTrigger>
+                <PopoverContent className="gap-y-2">
+                    <ButtonGroup>
+
+                        <Button
+                            onClick={() =>
+                                editor.chain().focus().splitListItem("listItem").run()
+                            }
+                            disabled={!editor.can().splitListItem("listItem")}
+                        >
+                            Split list item
+                        </Button>
+                        <Button
+                            onClick={() =>
+                                editor.chain().focus().sinkListItem("listItem").run()
+                            }
+                            disabled={!editor.can().sinkListItem("listItem")}
+                        >
+                            Sink list item
+                        </Button>
+                        <Button
+                            onClick={() =>
+                                editor.chain().focus().liftListItem("listItem").run()
+                            }
+                            disabled={!editor.can().liftListItem("listItem")}
+                        >
+                            Lift list item
+                        </Button>
+                    </ButtonGroup>
+
+                </PopoverContent>
+            </Popover>
+        </ButtonGroup>
+    );
 };
 
 export default UnorderedList;

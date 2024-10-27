@@ -1,7 +1,6 @@
 import React from 'react'
-import { EMenuProps } from '../../lib/type'
 import { Button, ButtonGroup } from '@nextui-org/react'
-import { BoldIcon, ItalicIcon, Strikethrough, TextIcon, UnderlineIcon } from 'lucide-react'
+import { BoldIcon, ItalicIcon, Strikethrough, UnderlineIcon } from 'lucide-react'
 import { useCurrentEditor } from '@tiptap/react'
 
 const FontStyle = () => {

@@ -1,6 +1,5 @@
 import { Button } from "@nextui-org/react";
 import React from "react";
-import { EMenuProps } from "../../lib/type";
 import { useCurrentEditor } from "@tiptap/react";
 
 const HorizontalRule = () => {

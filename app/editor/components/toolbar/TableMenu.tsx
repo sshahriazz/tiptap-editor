@@ -1,24 +1,14 @@
 import {
   Button,
   ButtonGroup,
-  Dropdown,
-  DropdownItem,
-  DropdownMenu,
-  DropdownTrigger,
-  MenuProps,
   Popover,
   PopoverContent,
   PopoverTrigger,
-  SharedSelection,
 } from "@nextui-org/react";
 import {
   ChevronDownIcon,
-  Table,
-  Table2Icon,
-  TableColumnsSplitIcon,
 } from "lucide-react";
 import React from "react";
-import { EMenuProps } from "../../lib/type";
 import { useCurrentEditor } from "@tiptap/react";
 
 const TableMenu = () => {
