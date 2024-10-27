@@ -2,7 +2,6 @@ import React from "react";
 import TableMenu from "./TableMenu";
 import TextAlignment from "./TextAlignment";
 import UndoRedo from "./UndoRedo";
-import UnorderedList from "./UnorderedList";
 import HorizontalRule from "./HorizontalRule";
 import FontColor from "./FontColor";
 import FontHighlight from "./FontHighlight";
@@ -13,6 +12,8 @@ import {Button} from "@nextui-org/react";
 import {useCurrentEditor} from "@tiptap/react";
 import {TypeIcon} from 'lucide-react'
 import Link from "./Link";
+import LIstItem from "./ListItem";
+import {ImageEditDialog} from "@/app/editor/components/image/ImageEditDialog";
 
 const Toolbar = () => {
     const {
@@ -22,12 +23,11 @@ const Toolbar = () => {
         return null;
     }
 
-    console.log(editor.getJSON())
-    console.log(editor.getHTML())
+
     return (
         <Card className={'sticky top-0 z-50 mt-3 w-fit mx-auto mb-4'}>
             <CardBody className={'flex-row gap-3'}>
-
+                <ImageEditDialog editor={editor}/>
                 <UndoRedo/>
 
                 <Heading/>
@@ -41,7 +41,7 @@ const Toolbar = () => {
 
                 <TextAlignment/>
 
-                <UnorderedList/>
+                <LIstItem/>
 
                 <TableMenu/>
 

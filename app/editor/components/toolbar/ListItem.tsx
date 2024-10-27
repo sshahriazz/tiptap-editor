@@ -1,9 +1,9 @@
 import {Button, ButtonGroup, Popover, PopoverContent, PopoverTrigger,} from "@nextui-org/react";
 import React from "react";
-import {ChevronDownIcon, ListIcon} from "lucide-react";
+import {ChevronDownIcon, ListIcon, ListOrderedIcon} from "lucide-react";
 import {useCurrentEditor} from "@tiptap/react";
 
-const UnorderedList = () => {
+const LIstItem = () => {
     const {
         editor
     } = useCurrentEditor()
@@ -21,6 +21,14 @@ const UnorderedList = () => {
                 className={editor.isActive("bulletList") ? "text-primary-500" : ""}
             >
                 <ListIcon size={16}/>
+            </Button>
+            <Button
+                isIconOnly
+                size="sm"
+                onClick={() => editor.chain().focus().toggleOrderedList().run()}
+                className={editor.isActive("orderedList") ? "text-primary-500" : ""}
+            >
+                <ListOrderedIcon size={16}/>
             </Button>
             <Popover classNames={{content: "py-2"}}>
                 <PopoverTrigger>
@@ -56,11 +64,10 @@ const UnorderedList = () => {
                             Lift list item
                         </Button>
                     </ButtonGroup>
-
                 </PopoverContent>
             </Popover>
         </ButtonGroup>
     );
 };
 
-export default UnorderedList;
+export default LIstItem;

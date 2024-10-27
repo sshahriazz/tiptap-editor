@@ -2,7 +2,6 @@
 
 import {BubbleMenu, EditorProvider, FloatingMenu,} from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
-import Image from "@tiptap/extension-image";
 import Highlight from "@tiptap/extension-highlight";
 import TextAlign from "@tiptap/extension-text-align";
 import Typography from "@tiptap/extension-typography";
@@ -13,17 +12,19 @@ import Table from "@tiptap/extension-table";
 import TableCell from "@tiptap/extension-table-cell";
 import TableHeader from "@tiptap/extension-table-header";
 import TableRow from "@tiptap/extension-table-row";
-import FileHandler from "@tiptap-pro/extension-file-handler";
 import Underline from "@tiptap/extension-underline";
 import {ToC} from "./TOC";
-import React, {Suspense, useState} from "react";
+import React, {useState} from "react";
+
+import {Image} from '../extensions/image/Image'
 
 import TableOfContents, {getHierarchicalIndexes,} from "@tiptap-pro/extension-table-of-contents";
 import {Link} from "@tiptap/extension-link";
+import {fileToBase64, randomId} from "@/app/editor/extensions/utils";
+import {FileHandler} from "@tiptap-pro/extension-file-handler";
 
-import dynamic from "next/dynamic";
 
-const PdfGeneration = dynamic(() => import('@/app/editor/components/PDFGeneration'), {ssr: false});
+// const PdfGeneration = dynamic(() => import('@/app/editor/components/PDFGeneration'), {ssr: false});
 
 
 const MemorizedToC = React.memo(ToC);
@@ -85,7 +86,36 @@ const Tiptap = () => {
                 });
             },
         }),
-        Image,
+        // Image,
+        Image.configure({
+            allowedMimeTypes: ['image/*'],
+            maxFileSize: 5 * 1024 * 1024,
+            allowBase64: true,
+            uploadFn: async file => {
+                // NOTE: This is a fake upload function. Replace this with your own upload logic.
+                // This function should return the uploaded image URL.
+
+                // wait 3s to simulate upload
+                await new Promise(resolve => setTimeout(resolve, 3000))
+
+                const src = await fileToBase64(file)
+
+                // either return { id: string | number, src: string } or just src
+                // return src;
+                return {id: randomId(), src}
+            },
+            onImageRemoved({id, src}) {
+                console.log('Image removed', {id, src})
+            },
+            onValidationError(errors) {
+                errors.forEach(error => {
+                    // toast.error('Image validation error', {
+                    //     position: 'bottom-right',
+                    //     description: error.reason
+                    // })
+                })
+            }
+        }),
         Highlight,
         Table.configure({
             resizable: true,
@@ -129,8 +159,6 @@ const Tiptap = () => {
 
     return (
         <div className="w-full">
-
-
             <EditorProvider
                 immediatelyRender={false}
                 editorProps={{
@@ -143,19 +171,13 @@ const Tiptap = () => {
                 extensions={extensions}
                 content={content}
             >
-
                 <BubbleMenu editor={null} tippyOptions={{duration: 100}}>
                     <Toolbar/>
                 </BubbleMenu>
-
                 <FloatingMenu editor={null} tippyOptions={{duration: 100}}>
                     <Toolbar/>
                 </FloatingMenu>
                 <MemorizedToC items={items}/>
-                <Suspense fallback={<div>Loading...</div>}>
-
-                    <PdfGeneration/>
-                </Suspense>
             </EditorProvider>
         </div>
     );
