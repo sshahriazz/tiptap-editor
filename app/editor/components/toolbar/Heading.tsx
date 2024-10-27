@@ -15,6 +15,7 @@ import {
     Heading4Icon,
     Heading5Icon,
     Heading6Icon,
+    HeadingIcon,
 } from "lucide-react";
 import { ReactNode, useState } from "react";
 import { ListboxWrapper } from "../ListboxWrapper";
@@ -56,12 +57,15 @@ const Heading = () => {
                             ? "text-primary-500"
                             : ""
                     }
+                    isIconOnly
                 >
-                    {editor.getAttributes("heading").level
-                        ? headingIconMapper[
-                              `H${editor.getAttributes("heading").level}`
-                          ]
-                        : "Heading"}
+                    {editor.getAttributes("heading").level ? (
+                        headingIconMapper[
+                            `H${editor.getAttributes("heading").level}`
+                        ]
+                    ) : (
+                        <HeadingIcon size={16} />
+                    )}
                 </Button>
             </PopoverTrigger>
             <PopoverContent>

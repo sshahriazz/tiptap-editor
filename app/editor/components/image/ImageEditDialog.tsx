@@ -1,9 +1,9 @@
-import type {Editor} from '@tiptap/react'
-import {useState} from 'react'
 import ImageEditBlock from "@/app/editor/components/image/ImageEditBlock";
-import {Modal, ModalBody, ModalContent} from "@nextui-org/modal";
-import {Button} from "@nextui-org/react";
-import {ImageIcon} from "lucide-react";
+import { Modal, ModalBody, ModalContent } from "@nextui-org/modal";
+import { Button } from "@nextui-org/react";
+import type { Editor } from "@tiptap/react";
+import { ImageIcon } from "lucide-react";
+import { useState } from "react";
 // import {
 //     Dialog,
 //     DialogContent,
@@ -15,36 +15,36 @@ import {ImageIcon} from "lucide-react";
 // import { ImageEditBlock } from './image-edit-block'
 
 interface ImageEditDialogProps {
-    editor: Editor
+    editor: Editor;
 }
 
-export const ImageEditDialog = ({editor}: ImageEditDialogProps) => {
-    const [open, setOpen] = useState(false)
+export const ImageEditDialog = ({ editor }: ImageEditDialogProps) => {
+    const [open, setOpen] = useState(false);
 
     return (
         <>
             <Button
-                isDisabled={editor.isActive('image')}
+                isDisabled={editor.isActive("image")}
                 aria-label="Image"
-                size={'sm'}
+                size={"sm"}
                 onClick={() => setOpen(true)}
             >
-                <ImageIcon className="size-5"/>
+                <ImageIcon className="size-5" />
             </Button>
-            <Modal
-                isOpen={open}
-                onClose={() => setOpen(false)}
-            >
-
+            <Modal isOpen={open} onClose={() => setOpen(false)}>
                 <ModalContent className="sm:max-w-lg">
                     <ModalBody>
                         <h1>Select image</h1>
-                        <p className="sr-only">Upload an image from your computer</p>
+                        <p className="sr-only">
+                            Upload an image from your computer
+                        </p>
                     </ModalBody>
-                    <ImageEditBlock editor={editor} close={() => setOpen(false)}/>
+                    <ImageEditBlock
+                        editor={editor}
+                        close={() => setOpen(false)}
+                    />
                 </ModalContent>
             </Modal>
         </>
-
-    )
-}
+    );
+};

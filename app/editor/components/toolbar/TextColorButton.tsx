@@ -5,6 +5,7 @@ import {
     PopoverTrigger,
 } from "@nextui-org/react";
 import { useCurrentEditor } from "@tiptap/react";
+import { Baseline } from "lucide-react";
 
 const colors = [
     { name: "black", hex: "#000000" },
@@ -29,8 +30,8 @@ const colors = [
     { name: "magenta", hex: "#ff00ff" },
     { name: "lightRedBerry3", hex: "#e6b8af" },
     { name: "lightRed3", hex: "#f4cccc" },
-    { name: "lightOrange3", hex: "#fce5cd" },
-    { name: "lightYellow3", hex: "#fff2cc" },
+    { name: "lightOrange3", hex: "#fce5cd", border: "#DADBDF" },
+    { name: "lightYellow3", hex: "#fff2cc", border: "#DADBDF" },
     { name: "lightGreen3", hex: "#d9ead3" },
     { name: "lightCyan3", hex: "#d0e0e3" },
     { name: "lightCornflowerBlue3", hex: "#c9daf8" },
@@ -39,8 +40,8 @@ const colors = [
     { name: "lightMagenta3", hex: "#ead1dc" },
     { name: "lightRedBerry2", hex: "#dd7e6b" },
     { name: "lightRed2", hex: "#ea9999" },
-    { name: "lightOrange2", hex: "#f9cb9c" },
-    { name: "lightYellow2", hex: "#ffe599" },
+    { name: "lightOrange2", hex: "#f9cb9c", border: "#DADBDF" },
+    { name: "lightYellow2", hex: "#ffe599", border: "#DADBDF" },
     { name: "lightGreen2", hex: "#b6d7a8" },
     { name: "lightCyan2", hex: "#a2c4c9" },
     { name: "lightCornflowerBlue2", hex: "#a4c2f4" },
@@ -50,7 +51,7 @@ const colors = [
     { name: "lightRedBerry1", hex: "#cc4125" },
     { name: "lightRed1", hex: "#e06666" },
     { name: "lightOrange1", hex: "#f6b26b" },
-    { name: "lightYellow1", hex: "#ffd966" },
+    { name: "lightYellow1", hex: "#ffd966", border: "#DADBDF" },
     { name: "lightGreen1", hex: "#93c47d" },
     { name: "lightCyan1", hex: "#76a5af" },
     { name: "lightCornflowerBlue1", hex: "#6d9eeb" },
@@ -111,8 +112,9 @@ const TextColorButton = () => {
                                 ? "text-primary-500"
                                 : ""
                         }
+                        isIconOnly
                     >
-                        Color
+                        <Baseline size={16} />
                     </Button>
                 </PopoverTrigger>
                 <PopoverContent className="p-4">
@@ -121,7 +123,10 @@ const TextColorButton = () => {
                             <div className="grid grid-cols-10 gap-1">
                                 {colors.map((color) => (
                                     <button
-                                        style={{ backgroundColor: color.hex }}
+                                        style={{
+                                            backgroundColor: color.hex,
+                                            border: `1px solid ${color.border}`,
+                                        }}
                                         key={color.hex}
                                         onClick={() =>
                                             editor
