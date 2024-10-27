@@ -3,7 +3,7 @@ import Tiptap from './components/TipTap'
 
 function Page() {
     return (
-        <div className={'bg-[#94cfff]'}><Tiptap/></div>
+        <div><Tiptap/></div>
     )
 }
 
