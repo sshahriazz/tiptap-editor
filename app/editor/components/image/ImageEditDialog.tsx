@@ -45,8 +45,8 @@ export const ImageEditDialog = ({ editor }: ImageEditDialogProps) => {
                         isIconOnly
                     >
                         <ActionButton
-                            contentForMac={<p>Image</p>}
-                            contentForWindows={<p>Image</p>}
+                            contentForMac={<p>Insert Image</p>}
+                            contentForWindows={<p>Insert Image</p>}
                         >
                             <Image size={16} />
                         </ActionButton>
