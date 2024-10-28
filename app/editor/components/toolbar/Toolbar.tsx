@@ -19,6 +19,8 @@ const Toolbar = () => {
         return null;
     }
 
+    console.log(editor.getJSON(), "getjosn");
+
     return (
         <Card className={"sticky top-0 z-50 mt-3 w-fit mx-auto mb-4"}>
             <CardBody className={"flex-row gap-3"}>
