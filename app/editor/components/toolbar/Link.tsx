@@ -1,34 +1,64 @@
-import { Button, ButtonGroup } from "@nextui-org/react";
+import {
+  Button,
+  ButtonGroup,
+  Input,
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@nextui-org/react";
 import { useCurrentEditor } from "@tiptap/react";
-import { Link2Icon } from "lucide-react";
-import { useCallback } from "react";
+import { Link2Icon, Unlink2Icon } from "lucide-react";
+import { useState } from "react";
 import ActionButton from "../ActionButton";
 
 function Link() {
   const { editor } = useCurrentEditor();
 
-  const setLink = useCallback(() => {
+  const [url, setUrl] = useState<string>(""); // Provide a default value for url
+
+  // const setLink = useCallback(
+  //     (e: any) => {
+  //         e.preventDefault();
+  //         if (!editor) {
+  //             return null;
+  //         }
+  //         const previousUrl = editor.getAttributes("link").href;
+
+  //         // cancelled
+  //         if (url === null) {
+  //             return;
+  //         }
+
+  //         // empty
+  //         if (url === "") {
+  //             editor
+  //                 .chain()
+  //                 .focus()
+  //                 .extendMarkRange("link")
+  //                 .unsetLink()
+  //                 .run();
+
+  //             return;
+  //         }
+
+  //         // update link
+  //         editor
+  //             .chain()
+  //             .focus()
+  //             .extendMarkRange("link")
+  //             .setLink({ href: url })
+  //             .run();
+  //     },
+  //     [editor]
+  // );
+
+  const setLink = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
     if (!editor) {
       return null;
     }
-    const previousUrl = editor.getAttributes("link").href;
-    const url = window.prompt("URL", previousUrl);
-
-    // cancelled
-    if (url === null) {
-      return;
-    }
-
-    // empty
-    if (url === "") {
-      editor.chain().focus().extendMarkRange("link").unsetLink().run();
-
-      return;
-    }
-
-    // update link
-    editor.chain().focus().extendMarkRange("link").setLink({ href: url }).run();
-  }, [editor]);
+    editor.chain().focus().setLink({ href: url }).run();
+  };
 
   if (!editor) {
     return null;
@@ -40,35 +70,66 @@ function Link() {
 
   return (
     <ButtonGroup className="button-group">
+      <Popover placement="bottom">
+        <PopoverTrigger>
+          <Button
+            isIconOnly
+            size={"sm"}
+            // onClick={setLink}
+            className={editor.isActive("link") ? "is-active" : ""}
+          >
+            <ActionButton
+              contentForMac={
+                <div className="flex items-center">
+                  <p className="mr-2">Insert Link</p>
+                </div>
+              }
+              contentForWindows={
+                <div className="flex items-center">
+                  <p className="mr-2">Insert Link</p>
+                </div>
+              }
+            >
+              <Link2Icon size={16} />
+            </ActionButton>
+          </Button>
+        </PopoverTrigger>
+        <PopoverContent>
+          {() => (
+            <form onSubmit={setLink} className="px-1 py-2">
+              <Input
+                placeholder="Enter URL"
+                onChange={(e) => {
+                  setUrl(e.target.value);
+                }}
+                type="link"
+              />
+              <Button type="submit">Submit</Button>
+            </form>
+          )}
+        </PopoverContent>
+      </Popover>
       <ActionButton
         contentForMac={
           <div className="flex items-center">
-            <p>Link</p>
+            <p className="mr-2">Remove Link</p>
           </div>
         }
         contentForWindows={
           <div className="flex items-center">
-            <p>Link</p>
+            <p className="mr-2">Remove Link</p>
           </div>
         }
       >
         <Button
-          variant="flat"
           isIconOnly
           size={"sm"}
-          onClick={setLink}
-          className={`${editor.isActive("link") ? "is-active" : ""} `}
+          onClick={() => editor.chain().focus().unsetLink().run()}
+          disabled={!editor.isActive("link")}
         >
-          <Link2Icon size={16} />
+          <Unlink2Icon size={16} />
         </Button>
       </ActionButton>
-      {/* <Button
-                isIconOnly size={'sm'}
-                onClick={() => editor.chain().focus().unsetLink().run()}
-                disabled={!editor.isActive('link')}
-            >
-                <Unlink2Icon size={16}/>
-            </Button> */}
     </ButtonGroup>
   );
 }

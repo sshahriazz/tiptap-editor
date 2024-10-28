@@ -1,6 +1,7 @@
 import {
   Button,
   ButtonGroup,
+  Kbd,
   Listbox,
   ListboxItem,
   Popover,
@@ -24,11 +25,20 @@ const LIstItem = () => {
   return (
     <ButtonGroup>
       <ActionButton
-        contentForMac={<p>Bullet list</p>}
-        contentForWindows={<p>Bullet list</p>}
+        contentForMac={
+          <div className="flex items-center">
+            <p className="mr-2">Bulleted list</p>{" "}
+            <Kbd keys={["command", "shift"]}>8</Kbd>
+          </div>
+        }
+        contentForWindows={
+          <div className="flex items-center">
+            <p className="mr-2">Bulleted list</p>
+            <p>ctrl + shift + 8</p>
+          </div>
+        }
       >
         <Button
-          variant="flat"
           isIconOnly
           size="sm"
           onClick={() => editor.chain().focus().toggleBulletList().run()}
@@ -38,11 +48,20 @@ const LIstItem = () => {
         </Button>
       </ActionButton>
       <ActionButton
-        contentForMac={<p>Ordered list</p>}
-        contentForWindows={<p>Ordered list</p>}
+        contentForMac={
+          <div className="flex items-center">
+            <p className="mr-2">Numbered list</p>{" "}
+            <Kbd keys={["command", "shift"]}>7</Kbd>
+          </div>
+        }
+        contentForWindows={
+          <div className="flex items-center">
+            <p className="mr-2">Numbered list</p>
+            <p>ctrl + shift + 7</p>
+          </div>
+        }
       >
         <Button
-          variant="flat"
           isIconOnly
           size="sm"
           onClick={() => editor.chain().focus().toggleOrderedList().run()}
@@ -53,48 +72,50 @@ const LIstItem = () => {
       </ActionButton>
       <Popover classNames={{ content: "py-2" }}>
         <PopoverTrigger>
-          <Button variant="flat" isIconOnly size="sm">
+          <Button variant="flat" isIconOnly size="sm" color="primary">
             <ChevronDownIcon size={16} />
           </Button>
         </PopoverTrigger>
-        <PopoverContent className="p-2">
-          <Listbox
-            aria-label="Single selection example"
-            variant="flat"
-            disallowEmptySelection
-            selectionMode="single"
-            selectedKeys={selectedKeys}
-            onSelectionChange={setSelectedKeys}
-            className="p-0"
-          >
-            <ListboxItem
-              key={"listItem1"}
-              onClick={() =>
-                editor.chain().focus().splitListItem("listItem").run()
-              }
-              // disabled={!editor.can().splitListItem("listItem")}
+        <PopoverContent>
+          <div>
+            <Listbox
+              aria-label="Single selection example"
+              variant="flat"
+              disallowEmptySelection
+              selectionMode="single"
+              selectedKeys={selectedKeys}
+              onSelectionChange={setSelectedKeys}
+              className="p-0"
             >
-              Split list item
-            </ListboxItem>
-            <ListboxItem
-              key={"listItem2"}
-              onClick={() =>
-                editor.chain().focus().sinkListItem("listItem").run()
-              }
-              // disabled={!editor.can().sinkListItem("listItem")}
-            >
-              Sink list item
-            </ListboxItem>
-            <ListboxItem
-              key={"listItem3"}
-              onClick={() =>
-                editor.chain().focus().liftListItem("listItem").run()
-              }
-              // disabled={!editor.can().liftListItem("listItem")}
-            >
-              Lift list item
-            </ListboxItem>
-          </Listbox>
+              <ListboxItem
+                key={"listItem1"}
+                onClick={() =>
+                  editor.chain().focus().splitListItem("listItem").run()
+                }
+                // disabled={!editor.can().splitListItem("listItem")}
+              >
+                Split list item
+              </ListboxItem>
+              <ListboxItem
+                key={"listItem2"}
+                onClick={() =>
+                  editor.chain().focus().sinkListItem("listItem").run()
+                }
+                // disabled={!editor.can().sinkListItem("listItem")}
+              >
+                Sink list item
+              </ListboxItem>
+              <ListboxItem
+                key={"listItem3"}
+                onClick={() =>
+                  editor.chain().focus().liftListItem("listItem").run()
+                }
+                // disabled={!editor.can().liftListItem("listItem")}
+              >
+                Lift list item
+              </ListboxItem>
+            </Listbox>
+          </div>
         </PopoverContent>
       </Popover>
     </ButtonGroup>

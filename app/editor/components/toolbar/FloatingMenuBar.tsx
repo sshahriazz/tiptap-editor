@@ -27,7 +27,6 @@ import {
   SquareCode,
 } from "lucide-react";
 import { ReactNode, useState } from "react";
-import { ListboxWrapper } from "../ListboxWrapper";
 import ImageEditBlock from "../image/ImageEditBlock";
 
 const headingIconMapper: Record<string, ReactNode> = {
@@ -152,7 +151,7 @@ const FloatingMenuBar = () => {
                   aria-label="Image"
                   onClick={() => setOpen(true)}
                 >
-                  <Popover placement="right">
+                  <Popover isOpen={open} onOpenChange={(open) => setOpen(open)}>
                     <PopoverTrigger>
                       <div className="flex items-center gap-2">
                         <ImageIcon className="size-5" />

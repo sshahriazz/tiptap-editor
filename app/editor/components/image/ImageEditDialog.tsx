@@ -1,7 +1,6 @@
 import ImageEditBlock from "@/app/editor/components/image/ImageEditBlock";
 import {
   Button,
-  Card,
   CardBody,
   CardHeader,
   Popover,
