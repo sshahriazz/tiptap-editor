@@ -180,26 +180,31 @@ const Tiptap = () => {
         </table>`;
 
   return (
-    <div className="w-full bg-red-300">
-      <EditorProvider
-        immediatelyRender={false}
-        editorProps={{
-          attributes: {
-            class: "prose bg-white focus:outline-none mx-auto",
-          },
-        }}
-        slotBefore={<Toolbar />}
-        extensions={extensions}
-        content={content}
-      >
-        <BubbleMenu editor={null} tippyOptions={{ duration: 100 }}>
-          <BubbleMenuBar />
-        </BubbleMenu>
-        <FloatingMenu editor={null} tippyOptions={{ duration: 100 }}>
-          <FloatingMenuBar />
-        </FloatingMenu>
-        <MemorizedToC items={items} />
-      </EditorProvider>
+    <div className="w-full h-screen bg-gray-100 flex justify-between">
+      <div className="w-[300px] h-screen bg-white"></div>
+      <div className="overflow-scroll w-[calc(100%-600px)]">
+        <EditorProvider
+          immediatelyRender={false}
+          editorProps={{
+            attributes: {
+              class:
+                "prose prose-sm sm:prose-base lg:prose-lg xl:prose-2xl mx-20 mt- focus:outline-none border p-20 bg-white rounded-md shadow-md",
+            },
+          }}
+          slotBefore={<Toolbar />}
+          extensions={extensions}
+          content={content}
+        >
+          <BubbleMenu editor={null} tippyOptions={{ duration: 100 }}>
+            <BubbleMenuBar />
+          </BubbleMenu>
+          <FloatingMenu editor={null} tippyOptions={{ duration: 100 }}>
+            <FloatingMenuBar />
+          </FloatingMenu>
+          <MemorizedToC items={items} />
+        </EditorProvider>
+      </div>
+      <div className="w-[300px] h-screen bg-white"></div>
     </div>
   );
 };
