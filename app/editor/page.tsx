@@ -1,10 +1,12 @@
-import React from 'react'
-import Tiptap from './components/TipTap'
+import React from "react";
+import Tiptap from "./components/TipTap";
 
 function Page() {
-    return (
-        <div><Tiptap/></div>
-    )
+  return (
+    <div>
+      <Tiptap />
+    </div>
+  );
 }
 
-export default Page
+export default Page;

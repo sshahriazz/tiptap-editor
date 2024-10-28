@@ -1,12 +1,11 @@
 import ImageEditBlock from "@/app/editor/components/image/ImageEditBlock";
 import {
-    Button,
-    Card,
-    CardBody,
-    CardHeader,
-    Popover,
-    PopoverContent,
-    PopoverTrigger,
+  Button,
+  CardBody,
+  CardHeader,
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
 } from "@nextui-org/react";
 import type { Editor } from "@tiptap/react";
 import { Image } from "lucide-react";
@@ -23,52 +22,46 @@ import ActionButton from "../ActionButton";
 // import { ImageEditBlock } from './image-edit-block'
 
 interface ImageEditDialogProps {
-    editor: Editor;
+  editor: Editor;
 }
 
 export const ImageEditDialog = ({ editor }: ImageEditDialogProps) => {
-    const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false);
 
-    return (
-        <>
-            <Popover
-                isOpen={open}
-                onOpenChange={(open) => setOpen(open)}
-                placement="bottom"
+  return (
+    <>
+      <Popover
+        isOpen={open}
+        onOpenChange={(open) => setOpen(open)}
+        placement="bottom"
+      >
+        <PopoverTrigger>
+          <Button
+            variant="flat"
+            isDisabled={editor.isActive("image")}
+            aria-label="Image"
+            size={"sm"}
+            onClick={() => setOpen(true)}
+            isIconOnly
+          >
+            <ActionButton
+              contentForMac={<p>Image</p>}
+              contentForWindows={<p>Image</p>}
             >
-                <PopoverTrigger>
-                    <Button
-                        isDisabled={editor.isActive("image")}
-                        aria-label="Image"
-                        size={"sm"}
-                        onClick={() => setOpen(true)}
-                        isIconOnly
-                    >
-                        <ActionButton
-                            contentForMac={<p>Insert Image</p>}
-                            contentForWindows={<p>Insert Image</p>}
-                        >
-                            <Image size={16} />
-                        </ActionButton>
-                    </Button>
-                </PopoverTrigger>
-                <PopoverContent>
-                    <Card>
-                        <CardHeader>
-                            <h1>Select image</h1>
-                            <p className="sr-only">
-                                Upload an image from your computer
-                            </p>
-                        </CardHeader>
-                        <CardBody>
-                            <ImageEditBlock
-                                editor={editor}
-                                close={() => setOpen(false)}
-                            />
-                        </CardBody>
-                    </Card>
-                </PopoverContent>
-            </Popover>
-        </>
-    );
+              <Image size={16} />
+            </ActionButton>
+          </Button>
+        </PopoverTrigger>
+        <PopoverContent className="p-0">
+          <CardHeader>
+            <h1 className="text-sm font-bold">Select image</h1>
+            <p className="sr-only">Upload an image from your computer</p>
+          </CardHeader>
+          <CardBody>
+            <ImageEditBlock editor={editor} close={() => setOpen(false)} />
+          </CardBody>
+        </PopoverContent>
+      </Popover>
+    </>
+  );
 };
