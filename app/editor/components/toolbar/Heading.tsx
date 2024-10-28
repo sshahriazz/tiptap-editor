@@ -18,6 +18,7 @@ import {
     HeadingIcon,
 } from "lucide-react";
 import { ReactNode, useState } from "react";
+import ActionButton from "../ActionButton";
 import { ListboxWrapper } from "../ListboxWrapper";
 
 const headingIconMapper: Record<string, ReactNode> = {
@@ -59,13 +60,18 @@ const Heading = () => {
                     }
                     isIconOnly
                 >
-                    {editor.getAttributes("heading").level ? (
-                        headingIconMapper[
-                            `H${editor.getAttributes("heading").level}`
-                        ]
-                    ) : (
-                        <HeadingIcon size={16} />
-                    )}
+                    <ActionButton
+                        contentForMac={<p>Heading</p>}
+                        contentForWindows={<p>Heading</p>}
+                    >
+                        {editor.getAttributes("heading").level ? (
+                            headingIconMapper[
+                                `H${editor.getAttributes("heading").level}`
+                            ]
+                        ) : (
+                            <HeadingIcon size={16} />
+                        )}
+                    </ActionButton>
                 </Button>
             </PopoverTrigger>
             <PopoverContent>

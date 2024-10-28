@@ -13,8 +13,8 @@ const UndoRedo = () => {
     return (
         <ButtonGroup>
             <ActionButton
-                contentForMac={<p>ctrl + K</p>}
-                contentForWindows={<p>ctrl + K</p>}
+                contentForMac={<p>Undo</p>}
+                contentForWindows={<p>Undo</p>}
             >
                 <Button
                     isIconOnly
@@ -25,14 +25,19 @@ const UndoRedo = () => {
                     <Undo2Icon size={16} />
                 </Button>
             </ActionButton>
-            <Button
-                isIconOnly
-                size="sm"
-                onPress={() => editor.chain().focus().redo().run()}
-                disabled={!editor.can().redo()}
+            <ActionButton
+                contentForMac={<p>Redo</p>}
+                contentForWindows={<p>Redo</p>}
             >
-                <Redo2Icon size={16} />
-            </Button>
+                <Button
+                    isIconOnly
+                    size="sm"
+                    onPress={() => editor.chain().focus().redo().run()}
+                    disabled={!editor.can().redo()}
+                >
+                    <Redo2Icon size={16} />
+                </Button>
+            </ActionButton>
         </ButtonGroup>
     );
 };

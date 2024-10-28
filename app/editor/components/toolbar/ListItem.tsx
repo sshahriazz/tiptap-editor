@@ -10,6 +10,7 @@ import {
 import { useCurrentEditor } from "@tiptap/react";
 import { ChevronDownIcon, ListIcon, ListOrderedIcon } from "lucide-react";
 import { useState } from "react";
+import ActionButton from "../ActionButton";
 import { ListboxWrapper } from "../ListboxWrapper";
 
 const LIstItem = () => {
@@ -22,26 +23,40 @@ const LIstItem = () => {
 
     return (
         <ButtonGroup>
-            <Button
-                isIconOnly
-                size="sm"
-                onClick={() => editor.chain().focus().toggleBulletList().run()}
-                className={
-                    editor.isActive("bulletList") ? "text-primary-500" : ""
-                }
+            <ActionButton
+                contentForMac={<p>Bullet list</p>}
+                contentForWindows={<p>Bullet list</p>}
             >
-                <ListIcon size={16} />
-            </Button>
-            <Button
-                isIconOnly
-                size="sm"
-                onClick={() => editor.chain().focus().toggleOrderedList().run()}
-                className={
-                    editor.isActive("orderedList") ? "text-primary-500" : ""
-                }
+                <Button
+                    isIconOnly
+                    size="sm"
+                    onClick={() =>
+                        editor.chain().focus().toggleBulletList().run()
+                    }
+                    className={
+                        editor.isActive("bulletList") ? "text-primary-500" : ""
+                    }
+                >
+                    <ListIcon size={16} />
+                </Button>
+            </ActionButton>
+            <ActionButton
+                contentForMac={<p>Ordered list</p>}
+                contentForWindows={<p>Ordered list</p>}
             >
-                <ListOrderedIcon size={16} />
-            </Button>
+                <Button
+                    isIconOnly
+                    size="sm"
+                    onClick={() =>
+                        editor.chain().focus().toggleOrderedList().run()
+                    }
+                    className={
+                        editor.isActive("orderedList") ? "text-primary-500" : ""
+                    }
+                >
+                    <ListOrderedIcon size={16} />
+                </Button>
+            </ActionButton>
             <Popover classNames={{ content: "py-2" }}>
                 <PopoverTrigger>
                     <Button variant="flat" isIconOnly size="sm" color="primary">

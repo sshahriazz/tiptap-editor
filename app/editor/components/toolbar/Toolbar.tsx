@@ -11,7 +11,6 @@ import Link from "./Link";
 import LIstItem from "./ListItem";
 import TableMenu from "./TableMenu";
 import TextAlignment from "./TextAlignment";
-import TextColorButton from "./TextColorButton";
 import UndoRedo from "./UndoRedo";
 
 const Toolbar = () => {
@@ -41,7 +40,7 @@ const Toolbar = () => {
                 </Button>
 
                 <Link />
-                <TextColorButton />
+                {/* <TextColorButton /> */}
 
                 <TextAlignment />
 

@@ -1,4 +1,4 @@
-import { Button, ButtonGroup } from "@nextui-org/react";
+import { Button, ButtonGroup, Kbd } from "@nextui-org/react";
 import { useCurrentEditor } from "@tiptap/react";
 import {
     BoldIcon,
@@ -8,6 +8,7 @@ import {
     Strikethrough,
     UnderlineIcon,
 } from "lucide-react";
+import ActionButton from "../ActionButton";
 
 const FontStyle = () => {
     const { editor } = useCurrentEditor();
@@ -18,56 +19,154 @@ const FontStyle = () => {
 
     return (
         <ButtonGroup>
-            <Button
-                isIconOnly
-                size="sm"
-                onClick={() => editor.chain().focus().toggleBold().run()}
-                className={editor.isActive("bold") ? "text-primary-500" : ""}
-            >
-                <BoldIcon size={16} />
-            </Button>
-            <Button
-                isIconOnly
-                size="sm"
-                onClick={() => editor.chain().focus().toggleItalic().run()}
-                className={editor.isActive("italic") ? "text-primary-500" : ""}
-            >
-                <ItalicIcon size={16} />
-            </Button>
-            <Button
-                isIconOnly
-                size="sm"
-                onClick={() => editor.chain().focus().toggleUnderline().run()}
-                className={
-                    editor.isActive("underline") ? "text-primary-500" : ""
+            <ActionButton
+                contentForMac={
+                    <div className="flex items-center">
+                        <p className="mr-2">Bold</p>{" "}
+                        <Kbd keys={["command"]}>B</Kbd>
+                    </div>
+                }
+                contentForWindows={
+                    <div className="flex items-center">
+                        <p className="mr-2">Bold</p>
+                        <p>ctrl + B</p>
+                    </div>
                 }
             >
-                <UnderlineIcon size={16} />
-            </Button>
-            <Button
-                isIconOnly
-                size="sm"
-                onClick={() => editor.chain().focus().toggleStrike().run()}
-                className={editor.isActive("strike") ? "text-primary-500" : ""}
+                <Button
+                    isIconOnly
+                    size="sm"
+                    onClick={() => editor.chain().focus().toggleBold().run()}
+                    className={
+                        editor.isActive("bold") ? "text-primary-500" : ""
+                    }
+                >
+                    <BoldIcon size={16} />
+                </Button>
+            </ActionButton>
+            <ActionButton
+                contentForMac={
+                    <div className="flex items-center">
+                        <p className="mr-2">Italic</p>{" "}
+                        <Kbd keys={["command"]}>I</Kbd>
+                    </div>
+                }
+                contentForWindows={
+                    <div className="flex items-center">
+                        <p className="mr-2">Italic</p>
+                        <p>ctrl + I</p>
+                    </div>
+                }
             >
-                <Strikethrough size={16} />
-            </Button>
-            <Button
-                isIconOnly
-                size="sm"
-                onClick={() => editor.chain().focus().toggleCode().run()}
-                className={editor.isActive("strike") ? "text-primary-500" : ""}
+                <Button
+                    isIconOnly
+                    size="sm"
+                    onClick={() => editor.chain().focus().toggleItalic().run()}
+                    className={
+                        editor.isActive("italic") ? "text-primary-500" : ""
+                    }
+                >
+                    <ItalicIcon size={16} />
+                </Button>
+            </ActionButton>
+            <ActionButton
+                contentForMac={
+                    <div className="flex items-center">
+                        <p className="mr-2">Underline</p>{" "}
+                        <Kbd keys={["command"]}>U</Kbd>
+                    </div>
+                }
+                contentForWindows={
+                    <div className="flex items-center">
+                        <p className="mr-2">Underline</p>
+                        <p>ctrl + U</p>
+                    </div>
+                }
             >
-                <Code size={16} />
-            </Button>
-            <Button
-                isIconOnly
-                size="sm"
-                onClick={() => editor.chain().focus().toggleCodeBlock().run()}
-                className={editor.isActive("strike") ? "text-primary-500" : ""}
+                <Button
+                    isIconOnly
+                    size="sm"
+                    onClick={() =>
+                        editor.chain().focus().toggleUnderline().run()
+                    }
+                    className={
+                        editor.isActive("underline") ? "text-primary-500" : ""
+                    }
+                >
+                    <UnderlineIcon size={16} />
+                </Button>
+            </ActionButton>
+            <ActionButton
+                contentForMac={
+                    <div className="flex items-center">
+                        <p>Strike</p>
+                    </div>
+                }
+                contentForWindows={
+                    <div className="flex items-center">
+                        <p>Strike</p>
+                    </div>
+                }
             >
-                <SquareCode size={16} />
-            </Button>
+                <Button
+                    isIconOnly
+                    size="sm"
+                    onClick={() => editor.chain().focus().toggleStrike().run()}
+                    className={
+                        editor.isActive("strike") ? "text-primary-500" : ""
+                    }
+                >
+                    <Strikethrough size={16} />
+                </Button>
+            </ActionButton>
+            <ActionButton
+                contentForMac={
+                    <div className="flex items-center">
+                        <p>Code</p>
+                    </div>
+                }
+                contentForWindows={
+                    <div className="flex items-center">
+                        <p>Code</p>
+                    </div>
+                }
+            >
+                <Button
+                    isIconOnly
+                    size="sm"
+                    onClick={() => editor.chain().focus().toggleCode().run()}
+                    className={
+                        editor.isActive("strike") ? "text-primary-500" : ""
+                    }
+                >
+                    <Code size={16} />
+                </Button>
+            </ActionButton>
+            <ActionButton
+                contentForMac={
+                    <div className="flex items-center">
+                        <p>Code block</p>{" "}
+                    </div>
+                }
+                contentForWindows={
+                    <div className="flex items-center">
+                        <p>Code block</p>
+                    </div>
+                }
+            >
+                <Button
+                    isIconOnly
+                    size="sm"
+                    onClick={() =>
+                        editor.chain().focus().toggleCodeBlock().run()
+                    }
+                    className={
+                        editor.isActive("strike") ? "text-primary-500" : ""
+                    }
+                >
+                    <SquareCode size={16} />
+                </Button>
+            </ActionButton>
         </ButtonGroup>
     );
 };

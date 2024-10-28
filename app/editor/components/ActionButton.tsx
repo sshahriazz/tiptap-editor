@@ -35,9 +35,17 @@ const ActionButton = ({
 
     switch (osName) {
         case "Mac":
-            return <Tooltip content={contentForMac}>{children}</Tooltip>;
+            return (
+                <Tooltip showArrow={true} content={contentForMac}>
+                    {children}
+                </Tooltip>
+            );
         case "Windows":
-            return <Tooltip content={contentForWindows}>{children}</Tooltip>;
+            return (
+                <Tooltip showArrow={true} content={contentForWindows}>
+                    {children}
+                </Tooltip>
+            );
         default:
             return children;
     }

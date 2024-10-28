@@ -2,6 +2,7 @@ import { Button, ButtonGroup } from "@nextui-org/react";
 import { useCurrentEditor } from "@tiptap/react";
 import { Link2Icon } from "lucide-react";
 import { useCallback } from "react";
+import ActionButton from "../ActionButton";
 
 function Link() {
     const { editor } = useCurrentEditor();
@@ -44,14 +45,27 @@ function Link() {
 
     return (
         <ButtonGroup className="button-group">
-            <Button
-                isIconOnly
-                size={"sm"}
-                onClick={setLink}
-                className={editor.isActive("link") ? "is-active" : ""}
+            <ActionButton
+                contentForMac={
+                    <div className="flex items-center">
+                        <p>Link</p>
+                    </div>
+                }
+                contentForWindows={
+                    <div className="flex items-center">
+                        <p>Link</p>
+                    </div>
+                }
             >
-                <Link2Icon size={16} />
-            </Button>
+                <Button
+                    isIconOnly
+                    size={"sm"}
+                    onClick={setLink}
+                    className={editor.isActive("link") ? "is-active" : ""}
+                >
+                    <Link2Icon size={16} />
+                </Button>
+            </ActionButton>
             {/* <Button
                 isIconOnly size={'sm'}
                 onClick={() => editor.chain().focus().unsetLink().run()}
