@@ -1,4 +1,4 @@
-import { Button, ButtonGroup } from "@nextui-org/react";
+import { Button, ButtonGroup, Kbd } from "@nextui-org/react";
 import { useCurrentEditor } from "@tiptap/react";
 import { AlignCenter, AlignJustify, AlignLeft, AlignRight } from "lucide-react";
 import ActionButton from "../ActionButton";
@@ -12,8 +12,18 @@ const TextAlignment = () => {
     return (
         <ButtonGroup>
             <ActionButton
-                contentForMac={<p>Left</p>}
-                contentForWindows={<p>Left</p>}
+                contentForMac={
+                    <div className="flex items-center">
+                        <p className="mr-2">Left</p>{" "}
+                        <Kbd keys={["command", "shift"]}>L</Kbd>
+                    </div>
+                }
+                contentForWindows={
+                    <div className="flex items-center">
+                        <p className="mr-2">Left</p>
+                        <p>ctrl + shift + L</p>
+                    </div>
+                }
             >
                 <Button
                     variant="flat"
@@ -32,8 +42,18 @@ const TextAlignment = () => {
                 </Button>
             </ActionButton>
             <ActionButton
-                contentForMac={<p>Center</p>}
-                contentForWindows={<p>Center</p>}
+                contentForMac={
+                    <div className="flex items-center">
+                        <p className="mr-2">Center</p>{" "}
+                        <Kbd keys={["command", "shift"]}>E</Kbd>
+                    </div>
+                }
+                contentForWindows={
+                    <div className="flex items-center">
+                        <p className="mr-2">Center</p>
+                        <p>ctrl + shift + L</p>
+                    </div>
+                }
             >
                 <Button
                     variant="flat"
@@ -52,8 +72,18 @@ const TextAlignment = () => {
                 </Button>
             </ActionButton>
             <ActionButton
-                contentForMac={<p>Right</p>}
-                contentForWindows={<p>Right</p>}
+                contentForMac={
+                    <div className="flex items-center">
+                        <p className="mr-2">Right</p>{" "}
+                        <Kbd keys={["command", "shift"]}>R</Kbd>
+                    </div>
+                }
+                contentForWindows={
+                    <div className="flex items-center">
+                        <p className="mr-2">Right</p>
+                        <p>ctrl + shift + R</p>
+                    </div>
+                }
             >
                 <Button
                     variant="flat"
@@ -72,8 +102,18 @@ const TextAlignment = () => {
                 </Button>
             </ActionButton>
             <ActionButton
-                contentForMac={<p>Justify</p>}
-                contentForWindows={<p>Justify</p>}
+                contentForMac={
+                    <div className="flex items-center">
+                        <p className="mr-2">Justify</p>{" "}
+                        <Kbd keys={["command", "shift"]}>J</Kbd>
+                    </div>
+                }
+                contentForWindows={
+                    <div className="flex items-center">
+                        <p className="mr-2 text-white">Justify</p>
+                        <p>ctrl + shift + J</p>
+                    </div>
+                }
             >
                 <Button
                     variant="flat"

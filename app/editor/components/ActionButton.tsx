@@ -47,7 +47,11 @@ const ActionButton = ({
                 </Tooltip>
             );
         default:
-            return children;
+            return (
+                <Tooltip showArrow={true} content={contentForMac}>
+                    {children}
+                </Tooltip>
+            );
     }
 };
 
