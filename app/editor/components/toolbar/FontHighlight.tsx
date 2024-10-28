@@ -33,6 +33,7 @@ const FontHighlight = () => {
         contentForWindows={<p>Highlight color</p>}
       >
         <Button
+          variant="flat"
           isIconOnly
           size="sm"
           onClick={() => editor.chain().focus().toggleHighlight().run()}
@@ -44,6 +45,7 @@ const FontHighlight = () => {
       <Popover>
         <PopoverTrigger>
           <Button
+            variant="flat"
             isIconOnly
             size="sm"
             className={

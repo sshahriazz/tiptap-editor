@@ -26,6 +26,7 @@ const UndoRedo = () => {
         }
       >
         <Button
+          variant="flat"
           isIconOnly
           size="sm"
           onPress={() => editor.chain().focus().undo().run()}
@@ -48,6 +49,7 @@ const UndoRedo = () => {
         }
       >
         <Button
+          variant="flat"
           isIconOnly
           size="sm"
           onPress={() => editor.chain().focus().redo().run()}

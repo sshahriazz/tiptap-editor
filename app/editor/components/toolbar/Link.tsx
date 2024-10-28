@@ -73,6 +73,7 @@ function Link() {
       <Popover placement="bottom">
         <PopoverTrigger>
           <Button
+            variant="flat"
             isIconOnly
             size={"sm"}
             // onClick={setLink}
@@ -122,6 +123,7 @@ function Link() {
         }
       >
         <Button
+          variant="flat"
           isIconOnly
           size={"sm"}
           onClick={() => editor.chain().focus().unsetLink().run()}

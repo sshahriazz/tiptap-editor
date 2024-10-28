@@ -39,6 +39,7 @@ const LIstItem = () => {
         }
       >
         <Button
+          variant="flat"
           isIconOnly
           size="sm"
           onClick={() => editor.chain().focus().toggleBulletList().run()}
@@ -62,6 +63,7 @@ const LIstItem = () => {
         }
       >
         <Button
+          variant="flat"
           isIconOnly
           size="sm"
           onClick={() => editor.chain().focus().toggleOrderedList().run()}
@@ -72,7 +74,7 @@ const LIstItem = () => {
       </ActionButton>
       <Popover classNames={{ content: "py-2" }}>
         <PopoverTrigger>
-          <Button variant="flat" isIconOnly size="sm" color="primary">
+          <Button variant="flat" isIconOnly size="sm">
             <ChevronDownIcon size={16} />
           </Button>
         </PopoverTrigger>
