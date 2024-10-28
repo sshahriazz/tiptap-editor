@@ -11,6 +11,7 @@ import Link from "./Link";
 import LIstItem from "./ListItem";
 import TableMenu from "./TableMenu";
 import TextAlignment from "./TextAlignment";
+import TextColorButton from "./TextColorButton";
 import UndoRedo from "./UndoRedo";
 
 const Toolbar = () => {
@@ -24,7 +25,6 @@ const Toolbar = () => {
     return (
         <Card className={"sticky top-0 z-50 mt-3 w-fit mx-auto mb-4"}>
             <CardBody className={"flex-row gap-3"}>
-                <ImageEditDialog editor={editor} />
                 <UndoRedo />
 
                 <Heading />
@@ -42,7 +42,8 @@ const Toolbar = () => {
                 </Button>
 
                 <Link />
-                {/* <TextColorButton /> */}
+                <ImageEditDialog editor={editor} />
+                <TextColorButton />
 
                 <TextAlignment />
 

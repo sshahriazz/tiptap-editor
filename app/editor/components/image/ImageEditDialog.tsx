@@ -9,8 +9,9 @@ import {
     PopoverTrigger,
 } from "@nextui-org/react";
 import type { Editor } from "@tiptap/react";
-import { ImageIcon } from "lucide-react";
+import { Image } from "lucide-react";
 import { useState } from "react";
+import ActionButton from "../ActionButton";
 // import {
 //     Dialog,
 //     DialogContent,
@@ -41,8 +42,14 @@ export const ImageEditDialog = ({ editor }: ImageEditDialogProps) => {
                         aria-label="Image"
                         size={"sm"}
                         onClick={() => setOpen(true)}
+                        isIconOnly
                     >
-                        <ImageIcon className="size-5" />
+                        <ActionButton
+                            contentForMac={<p>Image</p>}
+                            contentForWindows={<p>Image</p>}
+                        >
+                            <Image size={16} />
+                        </ActionButton>
                     </Button>
                 </PopoverTrigger>
                 <PopoverContent>

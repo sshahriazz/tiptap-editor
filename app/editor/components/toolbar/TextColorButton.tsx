@@ -3,9 +3,12 @@ import {
     Popover,
     PopoverContent,
     PopoverTrigger,
+    useDisclosure,
 } from "@nextui-org/react";
 import { useCurrentEditor } from "@tiptap/react";
 import { Baseline } from "lucide-react";
+import { useState } from "react";
+import ActionButton from "../ActionButton";
 
 const colors = [
     { name: "black", hex: "#000000" },
@@ -91,6 +94,9 @@ const colors = [
 ];
 
 const TextColorButton = () => {
+    const { isOpen, onOpen, onOpenChange } = useDisclosure();
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
     const { editor } = useCurrentEditor();
     if (!editor) {
         return null;
@@ -98,6 +104,8 @@ const TextColorButton = () => {
     return (
         <>
             <Popover
+                isOpen={isModalOpen}
+                onOpenChange={(open) => setIsModalOpen(open)}
                 classNames={{
                     content: "px-1",
                 }}
@@ -114,7 +122,12 @@ const TextColorButton = () => {
                         }
                         isIconOnly
                     >
-                        <Baseline size={16} />
+                        <ActionButton
+                            contentForMac={<p>Text color</p>}
+                            contentForWindows={<p>Text color</p>}
+                        >
+                            <Baseline size={16} />
+                        </ActionButton>
                     </Button>
                 </PopoverTrigger>
                 <PopoverContent className="p-4">
@@ -147,6 +160,30 @@ const TextColorButton = () => {
                                 ))}
                             </div>
                         </div>
+                        <br />
+                        <button
+                            onClick={() => {
+                                onOpen();
+                                setIsModalOpen(false);
+                            }}
+                        >
+                            Custom color picker
+                        </button>
+                        <input
+                            type="color"
+                            className="w-5 h-5 rounded-full border-none outline-none"
+                            onInput={(
+                                event: React.ChangeEvent<HTMLInputElement>
+                            ) =>
+                                editor
+                                    .chain()
+                                    .focus()
+                                    .setColor(event.target.value)
+                                    .run()
+                            }
+                            value={editor.getAttributes("textStyle").color}
+                            data-testid="setColor"
+                        />
                     </div>
                 </PopoverContent>
             </Popover>

@@ -46,26 +46,26 @@ const FontHighlight = () => {
             </ActionButton>
             <Popover>
                 <PopoverTrigger>
-                    <ActionButton
-                        contentForMac={<p>Text color</p>}
-                        contentForWindows={<p>Text color</p>}
+                    <Button
+                        isIconOnly
+                        size="sm"
+                        className={
+                            editor.isActive("highlight", { color: color })
+                                ? "is-active"
+                                : ""
+                        }
                     >
-                        <Button
-                            isIconOnly
-                            size="sm"
-                            className={
-                                editor.isActive("highlight", { color: color })
-                                    ? "is-active"
-                                    : ""
-                            }
+                        <ActionButton
+                            contentForMac={<p>Text background color</p>}
+                            contentForWindows={<p>Text background color</p>}
                         >
                             <BaselineIcon
                                 className="font-bold"
                                 style={{ color: color }}
                                 size={16}
                             />
-                        </Button>
-                    </ActionButton>
+                        </ActionButton>
+                    </Button>
                 </PopoverTrigger>
                 <PopoverContent>
                     <SketchPicker
@@ -93,15 +93,21 @@ const FontHighlight = () => {
                     />
                 </PopoverContent>
             </Popover>
-
-            <Button
-                isIconOnly
-                size="sm"
-                onClick={() => editor.chain().focus().unsetHighlight().run()}
-                disabled={!editor.isActive("highlight")}
+            <ActionButton
+                contentForMac={<p>Highlight remover</p>}
+                contentForWindows={<p>Highlight remover</p>}
             >
-                <PaintRoller size={16} />
-            </Button>
+                <Button
+                    isIconOnly
+                    size="sm"
+                    onClick={() =>
+                        editor.chain().focus().unsetHighlight().run()
+                    }
+                    disabled={!editor.isActive("highlight")}
+                >
+                    <PaintRoller size={16} />
+                </Button>
+            </ActionButton>
         </ButtonGroup>
     );
 };
