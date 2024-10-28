@@ -1,11 +1,12 @@
 import {
     Card,
     CardBody,
+    CardHeader,
     Listbox,
     ListboxItem,
-    Modal,
-    ModalBody,
-    ModalContent,
+    Popover,
+    PopoverContent,
+    PopoverTrigger,
     Tab,
     Tabs,
 } from "@nextui-org/react";
@@ -167,10 +168,33 @@ const FloatingMenuBar = () => {
                                     aria-label="Image"
                                     onClick={() => setOpen(true)}
                                 >
-                                    <div className="flex items-center gap-2">
-                                        <ImageIcon className="size-5" />
-                                        <p>Image</p>
-                                    </div>
+                                    <Popover placement="right">
+                                        <PopoverTrigger>
+                                            <div className="flex items-center gap-2">
+                                                <ImageIcon className="size-5" />
+                                                <p>Image</p>
+                                            </div>
+                                        </PopoverTrigger>
+                                        <PopoverContent>
+                                            <Card>
+                                                <CardHeader>
+                                                    <h1>Select image</h1>
+                                                    <p className="sr-only">
+                                                        Upload an image from
+                                                        your computer
+                                                    </p>
+                                                </CardHeader>
+                                                <CardBody>
+                                                    <ImageEditBlock
+                                                        editor={editor}
+                                                        close={() =>
+                                                            setOpen(false)
+                                                        }
+                                                    />
+                                                </CardBody>
+                                            </Card>
+                                        </PopoverContent>
+                                    </Popover>
                                 </ListboxItem>
                                 <ListboxItem
                                     key={"code"}
@@ -206,7 +230,7 @@ const FloatingMenuBar = () => {
                                 </ListboxItem>
                             </Listbox>
                         </ListboxWrapper>
-                        <Modal
+                        {/* <Modal
                             className="z-[999999]"
                             isOpen={open}
                             onClose={() => setOpen(false)}
@@ -223,7 +247,7 @@ const FloatingMenuBar = () => {
                                     close={() => setOpen(false)}
                                 />
                             </ModalContent>
-                        </Modal>
+                        </Modal> */}
                     </Tab>
                 </Tabs>
             </CardBody>
