@@ -6,7 +6,7 @@ import {
     PopoverTrigger,
 } from "@nextui-org/react";
 import { useCurrentEditor } from "@tiptap/react";
-import { BaselineIcon, BrushIcon, PaintRoller } from "lucide-react";
+import { BaselineIcon, Highlighter, PaintRoller } from "lucide-react";
 import { useEffect, useState } from "react";
 import { SketchPicker } from "react-color";
 import ActionButton from "../ActionButton";
@@ -41,7 +41,7 @@ const FontHighlight = () => {
                     }
                     className={editor.isActive("highlight") ? "is-active" : ""}
                 >
-                    <BrushIcon style={{ color: color }} size={16} />
+                    <Highlighter style={{ color: color }} size={16} />
                 </Button>
             </ActionButton>
             <Popover>

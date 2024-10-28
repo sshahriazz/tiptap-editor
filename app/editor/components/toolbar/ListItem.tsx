@@ -1,6 +1,7 @@
 import {
     Button,
     ButtonGroup,
+    Kbd,
     Listbox,
     ListboxItem,
     Popover,
@@ -24,8 +25,18 @@ const LIstItem = () => {
     return (
         <ButtonGroup>
             <ActionButton
-                contentForMac={<p>Bullet list</p>}
-                contentForWindows={<p>Bullet list</p>}
+                contentForMac={
+                    <div className="flex items-center">
+                        <p className="mr-2">Bulleted list</p>{" "}
+                        <Kbd keys={["command", "shift"]}>8</Kbd>
+                    </div>
+                }
+                contentForWindows={
+                    <div className="flex items-center">
+                        <p className="mr-2">Bulleted list</p>
+                        <p>ctrl + shift + 8</p>
+                    </div>
+                }
             >
                 <Button
                     isIconOnly
@@ -41,8 +52,18 @@ const LIstItem = () => {
                 </Button>
             </ActionButton>
             <ActionButton
-                contentForMac={<p>Ordered list</p>}
-                contentForWindows={<p>Ordered list</p>}
+                contentForMac={
+                    <div className="flex items-center">
+                        <p className="mr-2">Numbered list</p>{" "}
+                        <Kbd keys={["command", "shift"]}>7</Kbd>
+                    </div>
+                }
+                contentForWindows={
+                    <div className="flex items-center">
+                        <p className="mr-2">Numbered list</p>
+                        <p>ctrl + shift + 7</p>
+                    </div>
+                }
             >
                 <Button
                     isIconOnly
