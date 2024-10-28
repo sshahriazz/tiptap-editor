@@ -1,31 +1,33 @@
 "use client";
 
-import {BubbleMenu, EditorProvider, FloatingMenu,} from "@tiptap/react";
-import StarterKit from "@tiptap/starter-kit";
+import { Color } from "@tiptap/extension-color";
 import Highlight from "@tiptap/extension-highlight";
-import TextAlign from "@tiptap/extension-text-align";
-import Typography from "@tiptap/extension-typography";
-import TextStyle from "@tiptap/extension-text-style";
-import {Color} from "@tiptap/extension-color";
-import Toolbar from "./toolbar/Toolbar";
 import Table from "@tiptap/extension-table";
 import TableCell from "@tiptap/extension-table-cell";
 import TableHeader from "@tiptap/extension-table-header";
 import TableRow from "@tiptap/extension-table-row";
+import TextAlign from "@tiptap/extension-text-align";
+import TextStyle from "@tiptap/extension-text-style";
+import Typography from "@tiptap/extension-typography";
 import Underline from "@tiptap/extension-underline";
-import {ToC} from "./TOC";
-import React, {useState} from "react";
+import { BubbleMenu, EditorProvider, FloatingMenu } from "@tiptap/react";
+import StarterKit from "@tiptap/starter-kit";
+import React, { useState } from "react";
+import { ToC } from "./TOC";
+import Toolbar from "./toolbar/Toolbar";
 
-import {Image} from '../extensions/image/Image'
+import { Image } from "../extensions/image/Image";
 
-import TableOfContents, {getHierarchicalIndexes,} from "@tiptap-pro/extension-table-of-contents";
-import {Link} from "@tiptap/extension-link";
-import {fileToBase64, randomId} from "@/app/editor/extensions/utils";
-import {FileHandler} from "@tiptap-pro/extension-file-handler";
-
+import { fileToBase64, randomId } from "@/app/editor/extensions/utils";
+import { FileHandler } from "@tiptap-pro/extension-file-handler";
+import TableOfContents, {
+    getHierarchicalIndexes,
+} from "@tiptap-pro/extension-table-of-contents";
+import { Link } from "@tiptap/extension-link";
+import { default as BubbleMenuBar } from "./toolbar/BubbleMenuBar";
+import FloatingMenuBar from "./toolbar/FloatingMenuBar";
 
 // const PdfGeneration = dynamic(() => import('@/app/editor/components/PDFGeneration'), {ssr: false});
-
 
 const MemorizedToC = React.memo(ToC);
 
@@ -39,7 +41,12 @@ const Tiptap = () => {
             multicolor: true,
         }),
         FileHandler.configure({
-            allowedMimeTypes: ["image/png", "image/jpeg", "image/gif", "image/webp"],
+            allowedMimeTypes: [
+                "image/png",
+                "image/jpeg",
+                "image/gif",
+                "image/webp",
+            ],
             onDrop: (currentEditor, files, pos) => {
                 files.forEach((file) => {
                     const fileReader = new FileReader();
@@ -74,12 +81,15 @@ const Tiptap = () => {
                     fileReader.onload = () => {
                         currentEditor
                             .chain()
-                            .insertContentAt(currentEditor.state.selection.anchor, {
-                                type: "image",
-                                attrs: {
-                                    src: fileReader.result,
-                                },
-                            })
+                            .insertContentAt(
+                                currentEditor.state.selection.anchor,
+                                {
+                                    type: "image",
+                                    attrs: {
+                                        src: fileReader.result,
+                                    },
+                                }
+                            )
                             .focus()
                             .run();
                     };
@@ -88,33 +98,33 @@ const Tiptap = () => {
         }),
         // Image,
         Image.configure({
-            allowedMimeTypes: ['image/*'],
+            allowedMimeTypes: ["image/*"],
             maxFileSize: 5 * 1024 * 1024,
             allowBase64: true,
-            uploadFn: async file => {
+            uploadFn: async (file) => {
                 // NOTE: This is a fake upload function. Replace this with your own upload logic.
                 // This function should return the uploaded image URL.
 
                 // wait 3s to simulate upload
-                await new Promise(resolve => setTimeout(resolve, 3000))
+                await new Promise((resolve) => setTimeout(resolve, 3000));
 
-                const src = await fileToBase64(file)
+                const src = await fileToBase64(file);
 
                 // either return { id: string | number, src: string } or just src
                 // return src;
-                return {id: randomId(), src}
+                return { id: randomId(), src };
             },
-            onImageRemoved({id, src}) {
-                console.log('Image removed', {id, src})
+            onImageRemoved({ id, src }) {
+                console.log("Image removed", { id, src });
             },
             onValidationError(errors) {
-                errors.forEach(error => {
+                errors.forEach((error) => {
                     // toast.error('Image validation error', {
                     //     position: 'bottom-right',
                     //     description: error.reason
                     // })
-                })
-            }
+                });
+            },
         }),
         Highlight,
         Table.configure({
@@ -126,7 +136,7 @@ const Tiptap = () => {
         Link.configure({
             openOnClick: true,
             autolink: true,
-            defaultProtocol: 'https',
+            defaultProtocol: "https",
         }),
         TextAlign.configure({
             types: ["heading", "paragraph"],
@@ -156,28 +166,26 @@ const Tiptap = () => {
           </tbody>
         </table>`;
 
-
     return (
         <div className="w-full">
             <EditorProvider
                 immediatelyRender={false}
                 editorProps={{
                     attributes: {
-                        class:
-                            "prose bg-white focus:outline-none mx-auto",
+                        class: "prose bg-white focus:outline-none mx-auto",
                     },
                 }}
-                slotBefore={<Toolbar/>}
+                slotBefore={<Toolbar />}
                 extensions={extensions}
                 content={content}
             >
-                <BubbleMenu editor={null} tippyOptions={{duration: 100}}>
-                    <Toolbar/>
+                <BubbleMenu editor={null} tippyOptions={{ duration: 100 }}>
+                    <BubbleMenuBar />
                 </BubbleMenu>
-                <FloatingMenu editor={null} tippyOptions={{duration: 100}}>
-                    <Toolbar/>
+                <FloatingMenu editor={null} tippyOptions={{ duration: 100 }}>
+                    <FloatingMenuBar />
                 </FloatingMenu>
-                <MemorizedToC items={items}/>
+                <MemorizedToC items={items} />
             </EditorProvider>
         </div>
     );
