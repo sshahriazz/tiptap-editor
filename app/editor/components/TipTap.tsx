@@ -182,7 +182,14 @@ const Tiptap = () => {
                 <BubbleMenu editor={null} tippyOptions={{ duration: 100 }}>
                     <BubbleMenuBar />
                 </BubbleMenu>
-                <FloatingMenu editor={null} tippyOptions={{ duration: 100 }}>
+                <FloatingMenu
+                    editor={null}
+                    tippyOptions={{
+                        duration: 100,
+                        placement: "bottom-start",
+                        onHide: () => console.log("onHide"),
+                    }}
+                >
                     <FloatingMenuBar />
                 </FloatingMenu>
                 <MemorizedToC items={items} />
