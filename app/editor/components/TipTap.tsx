@@ -15,8 +15,6 @@ import Toolbar from "./toolbar/Toolbar";
 import { Image } from "../extensions/image/Image";
 
 import { FontSize } from "@/app/editor/extensions/fontsize";
-import Column from "@/app/editor/extensions/multi-column/Column";
-import Columns from "@/app/editor/extensions/multi-column/Columns";
 import { fileToBase64, randomId } from "@/app/editor/extensions/utils";
 import { FileHandler } from "@tiptap-pro/extension-file-handler";
 import TableOfContents from "@tiptap-pro/extension-table-of-contents";
@@ -143,14 +141,8 @@ const Tiptap = () => {
         TextAlign.configure({
             types: ["heading", "paragraph"],
         }),
-        // TableOfContents.configure({
-        //     getIndex: getHierarchicalIndexes,
-        //     onUpdate(content) {
-        //         setItems(content);
-        //     },
-        // }),
-        Columns,
-        Column,
+        TableOfContents,
+        TableOfContentsNode,
         Typography,
         TextStyle,
         Color,
