@@ -1,6 +1,6 @@
 "use client";
 
-import { Color } from "@tiptap/extension-color";
+import {Color} from "@tiptap/extension-color";
 import Highlight from "@tiptap/extension-highlight";
 import Table from "@tiptap/extension-table";
 import TableCell from "@tiptap/extension-table-cell";
@@ -10,26 +10,22 @@ import TextAlign from "@tiptap/extension-text-align";
 import TextStyle from "@tiptap/extension-text-style";
 import Typography from "@tiptap/extension-typography";
 import Underline from "@tiptap/extension-underline";
-import { BubbleMenu, EditorProvider } from "@tiptap/react";
+import {BubbleMenu, EditorProvider} from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
-import React, { useState } from "react";
-import { ToC } from "./TOC";
+import React, {useState} from "react";
+import {ToC} from "./TOC";
 import Toolbar from "./toolbar/Toolbar";
 
-import { Image } from "../extensions/image/Image";
+import {Image} from "../extensions/image/Image";
 
-import { FontSize } from "@/app/editor/extensions/fontsize";
-import Column from "@/app/editor/extensions/multi-column/Column";
-import Columns from "@/app/editor/extensions/multi-column/Columns";
-import { fileToBase64, randomId } from "@/app/editor/extensions/utils";
-import { FileHandler } from "@tiptap-pro/extension-file-handler";
-import TableOfContents, {
-    getHierarchicalIndexes,
-} from "@tiptap-pro/extension-table-of-contents";
-import { Link } from "@tiptap/extension-link";
+import {FontSize} from "@/app/editor/extensions/fontsize";
+import {fileToBase64, randomId} from "@/app/editor/extensions/utils";
+import {FileHandler} from "@tiptap-pro/extension-file-handler";
+import TableOfContents, {getHierarchicalIndexes,} from "@tiptap-pro/extension-table-of-contents";
+import {Link} from "@tiptap/extension-link";
 import Placeholder from "@tiptap/extension-placeholder";
-import { SlashCommand } from "../extensions/SlashCommand";
-import { default as BubbleMenuBar } from "./toolbar/BubbleMenuBar";
+import {SlashCommand} from "../extensions/SlashCommand";
+import {default as BubbleMenuBar} from "./toolbar/BubbleMenuBar";
 
 // const PdfGeneration = dynamic(() => import('@/app/editor/components/PDFGeneration'), {ssr: false});
 
@@ -117,10 +113,10 @@ const Tiptap = () => {
 
                 // either return { id: string | number, src: string } or just src
                 // return src;
-                return { id: randomId(), src };
+                return {id: randomId(), src};
             },
-            onImageRemoved({ id, src }) {
-                console.log("Image removed", { id, src });
+            onImageRemoved({id, src}) {
+                console.log("Image removed", {id, src});
             },
             onValidationError(errors) {
                 errors.forEach((error) => {
@@ -152,8 +148,7 @@ const Tiptap = () => {
                 setItems(content);
             },
         }),
-        Columns,
-        Column,
+
         Typography,
         TextStyle,
         Color,
@@ -189,12 +184,12 @@ const Tiptap = () => {
                             class: "prose max-w-[950px] mx-auto focus:outline-none border p-24 bg-white rounded-md shadow-md",
                         },
                     }}
-                    slotBefore={<Toolbar />}
+                    slotBefore={<Toolbar/>}
                     extensions={extensions}
                     content={content}
                 >
-                    <BubbleMenu editor={null} tippyOptions={{ duration: 100 }}>
-                        <BubbleMenuBar />
+                    <BubbleMenu editor={null} tippyOptions={{duration: 100}}>
+                        <BubbleMenuBar/>
                     </BubbleMenu>
                     {/* <FloatingMenu
                         editor={null}
@@ -205,7 +200,7 @@ const Tiptap = () => {
                     >
                         <FloatingMenuBar />
                     </FloatingMenu> */}
-                    <MemorizedToC items={items} />
+                    <MemorizedToC items={items}/>
                 </EditorProvider>
             </div>
         </div>
