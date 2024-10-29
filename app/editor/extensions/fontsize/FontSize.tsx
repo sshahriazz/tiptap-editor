@@ -88,7 +88,7 @@ export default function FontSize() {
       <ActionButton
         contentForMac={
           <div className="flex items-center">
-            <p className="mr-2">Italic</p> <Kbd keys={["command"]}>I</Kbd>
+            <p className="mr-2">Font size</p>
           </div>
         }
         contentForWindows={

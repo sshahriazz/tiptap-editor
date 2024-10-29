@@ -82,22 +82,21 @@ const Heading = () => {
           selectionMode="single"
           selectedKeys={selectedKeys}
           onSelectionChange={setSelectedKeys}
-          className="p-0"
+          className="p-0 "
         >
           {Object.keys(headingIconMapper).map((key, index) => (
             <ListboxItem
               key={key}
-              radious="sm"
               onPress={() => handleHeadingChange((index + 1) as Level)}
-              className={
+              className={` ${
                 editor.isActive("heading", {
                   level: index + 1,
                 })
                   ? "text-primary-500"
                   : ""
-              }
+              }`}
             >
-              <p className="text-sm">{headingIconMapper[key]}</p>
+              <p className="text-base">{headingIconMapper[key]}</p>
             </ListboxItem>
           ))}
         </Listbox>
