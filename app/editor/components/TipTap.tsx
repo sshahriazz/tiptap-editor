@@ -27,6 +27,8 @@ import { Link } from "@tiptap/extension-link";
 import { default as BubbleMenuBar } from "./toolbar/BubbleMenuBar";
 import FloatingMenuBar from "./toolbar/FloatingMenuBar";
 import { FontSize } from "@/app/editor/extensions/fontsize";
+import Columns from "@/app/editor/extensions/multi-column/Columns";
+import Column from "@/app/editor/extensions/multi-column/Column";
 
 // const PdfGeneration = dynamic(() => import('@/app/editor/components/PDFGeneration'), {ssr: false});
 
@@ -141,12 +143,13 @@ const Tiptap = () => {
         setItems(content);
       },
     }),
+    Columns,
+    Column,
     Typography,
     TextStyle,
     Color,
   ];
-  const content = `<p>Hello World! 🌎️</p> 
-    <table>
+  const content = `<p>Hello World! 🌎️</p>   <table>
           <tbody>
             <tr>
               <th>Name</th>
