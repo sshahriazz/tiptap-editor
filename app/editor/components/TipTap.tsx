@@ -165,37 +165,38 @@ const Tiptap = () => {
             </tr>
           </tbody>
         </table>`;
-
-    return (
-        <div className="w-full">
-            <EditorProvider
-                immediatelyRender={false}
-                editorProps={{
-                    attributes: {
-                        class: "prose bg-white focus:outline-none mx-auto",
-                    },
-                }}
-                slotBefore={<Toolbar />}
-                extensions={extensions}
-                content={content}
-            >
-                <BubbleMenu editor={null} tippyOptions={{ duration: 100 }}>
-                    <BubbleMenuBar />
-                </BubbleMenu>
-                <FloatingMenu
-                    editor={null}
-                    tippyOptions={{
-                        duration: 100,
-                        placement: "bottom-start",
-                        onHide: () => console.log("onHide"),
-                    }}
-                >
-                    <FloatingMenuBar />
-                </FloatingMenu>
-                <MemorizedToC items={items} />
-            </EditorProvider>
-        </div>
-    );
+  // prose-sm sm:prose-base lg:prose-lg xl:prose-2xl
+  return (
+    <div className="w-full h-screen bg-gray-100 flex justify-between">
+      <div className="w-[300px] h-screen bg-white"></div>
+      <div className="overflow-scroll w-[calc(100%-600px)]">
+        <EditorProvider
+          immediatelyRender={false}
+          editorProps={{
+            attributes: {
+              class:
+                "prose   mx-20 mt- focus:outline-none border p-20 bg-white rounded-md shadow-md",
+            },
+          }}
+          slotBefore={<Toolbar />}
+          extensions={extensions}
+          content={content}
+        >
+          <BubbleMenu
+            editor={null}
+            tippyOptions={{ duration: 100, placement: "bottom-start" }}
+          >
+            <BubbleMenuBar />
+          </BubbleMenu>
+          <FloatingMenu editor={null} tippyOptions={{ duration: 100 }}>
+            <FloatingMenuBar />
+          </FloatingMenu>
+          <MemorizedToC items={items} />
+        </EditorProvider>
+      </div>
+      <div className="w-[300px] h-screen bg-white"></div>
+    </div>
+  );
 };
 
 export default Tiptap;
