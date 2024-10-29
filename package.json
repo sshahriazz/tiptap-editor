@@ -12,6 +12,7 @@
     "@nextui-org/react": "^2.4.8",
     "@react-pdf/renderer": "^4.0.0",
     "@tailwindcss/typography": "^0.5.15",
+    "@tippyjs/react": "^4.2.6",
     "@tiptap-pro/extension-file-handler": "^2.11.9",
     "@tiptap-pro/extension-table-of-contents": "^2.11.9",
     "@tiptap/extension-color": "^2.9.1",

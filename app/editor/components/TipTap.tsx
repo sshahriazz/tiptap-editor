@@ -2,10 +2,6 @@
 
 import { Color } from "@tiptap/extension-color";
 import Highlight from "@tiptap/extension-highlight";
-import Table from "@tiptap/extension-table";
-import TableCell from "@tiptap/extension-table-cell";
-import TableHeader from "@tiptap/extension-table-header";
-import TableRow from "@tiptap/extension-table-row";
 import TextAlign from "@tiptap/extension-text-align";
 import TextStyle from "@tiptap/extension-text-style";
 import Typography from "@tiptap/extension-typography";
@@ -23,12 +19,13 @@ import Column from "@/app/editor/extensions/multi-column/Column";
 import Columns from "@/app/editor/extensions/multi-column/Columns";
 import { fileToBase64, randomId } from "@/app/editor/extensions/utils";
 import { FileHandler } from "@tiptap-pro/extension-file-handler";
-import TableOfContents, {
-    getHierarchicalIndexes,
-} from "@tiptap-pro/extension-table-of-contents";
+import TableOfContents from "@tiptap-pro/extension-table-of-contents";
 import { Link } from "@tiptap/extension-link";
 import Placeholder from "@tiptap/extension-placeholder";
 import { SlashCommand } from "../extensions/SlashCommand";
+import { Table, TableCell, TableHeader, TableRow } from "../extensions/Table";
+import "../extensions/Table/table.css";
+import { TableOfContentsNode } from "../extensions/TableOfContentsNode";
 import { default as BubbleMenuBar } from "./toolbar/BubbleMenuBar";
 
 // const PdfGeneration = dynamic(() => import('@/app/editor/components/PDFGeneration'), {ssr: false});
@@ -132,12 +129,12 @@ const Tiptap = () => {
             },
         }),
         Highlight,
-        Table.configure({
-            resizable: true,
-        }),
+        Table,
         TableCell,
         TableHeader,
         TableRow,
+        TableOfContents,
+        TableOfContentsNode,
         Link.configure({
             openOnClick: true,
             autolink: true,
@@ -146,12 +143,12 @@ const Tiptap = () => {
         TextAlign.configure({
             types: ["heading", "paragraph"],
         }),
-        TableOfContents.configure({
-            getIndex: getHierarchicalIndexes,
-            onUpdate(content) {
-                setItems(content);
-            },
-        }),
+        // TableOfContents.configure({
+        //     getIndex: getHierarchicalIndexes,
+        //     onUpdate(content) {
+        //         setItems(content);
+        //     },
+        // }),
         Columns,
         Column,
         Typography,
