@@ -19,6 +19,8 @@ import Toolbar from "./toolbar/Toolbar";
 import { Image } from "../extensions/image/Image";
 
 import { FontSize } from "@/app/editor/extensions/fontsize";
+import Column from "@/app/editor/extensions/multi-column/Column";
+import Columns from "@/app/editor/extensions/multi-column/Columns";
 import { fileToBase64, randomId } from "@/app/editor/extensions/utils";
 import { FileHandler } from "@tiptap-pro/extension-file-handler";
 import TableOfContents, {
@@ -150,6 +152,8 @@ const Tiptap = () => {
                 setItems(content);
             },
         }),
+        Columns,
+        Column,
         Typography,
         TextStyle,
         Color,
@@ -160,8 +164,7 @@ const Tiptap = () => {
         }),
         SlashCommand,
     ];
-    const content = `<p>Hello World! 🌎️</p> 
-    <table>
+    const content = `<p>Hello World! 🌎️</p>   <table>
           <tbody>
             <tr>
               <th>Name</th>
