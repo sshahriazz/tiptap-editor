@@ -178,7 +178,7 @@ const Tiptap = () => {
             </tr>
           </tbody>
         </table>`;
-
+  // prose-sm sm:prose-base lg:prose-lg xl:prose-2xl
   return (
     <div className="w-full h-screen bg-gray-100 flex justify-between">
       <div className="w-[300px] h-screen bg-white"></div>
@@ -188,14 +188,17 @@ const Tiptap = () => {
           editorProps={{
             attributes: {
               class:
-                "prose prose-sm sm:prose-base lg:prose-lg xl:prose-2xl mx-20 mt- focus:outline-none border p-20 bg-white rounded-md shadow-md",
+                "prose   mx-20 mt- focus:outline-none border p-20 bg-white rounded-md shadow-md",
             },
           }}
           slotBefore={<Toolbar />}
           extensions={extensions}
           content={content}
         >
-          <BubbleMenu editor={null} tippyOptions={{ duration: 100 }}>
+          <BubbleMenu
+            editor={null}
+            tippyOptions={{ duration: 100, placement: "bottom-start" }}
+          >
             <BubbleMenuBar />
           </BubbleMenu>
           <FloatingMenu editor={null} tippyOptions={{ duration: 100 }}>
