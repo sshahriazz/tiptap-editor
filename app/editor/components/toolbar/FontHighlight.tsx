@@ -14,13 +14,13 @@ import ActionButton from "../ActionButton";
 const FontHighlight = () => {
   const { editor } = useCurrentEditor();
 
-  const [color, setColor] = useState<string>("#000000");
+  const [color, setColor] = useState<string>("#fff");
 
   useEffect(() => {
     if (!editor) {
       return () => {};
     }
-    setColor(editor.getAttributes("highlight").color);
+    // setColor(editor.getAttributes("highlight").color);
   }, [editor]);
   if (!editor) {
     return null;
@@ -37,9 +37,12 @@ const FontHighlight = () => {
           isIconOnly
           size="sm"
           onClick={() => editor.chain().focus().toggleHighlight().run()}
-          className={editor.isActive("highlight") ? "is-active" : ""}
+          className={editor.isActive("highlight") ? "text-primary-500" : ""}
         >
-          <Highlighter style={{ color: color }} size={16} />
+          <Highlighter
+            // style={{ color: color }}
+            size={16}
+          />
         </Button>
       </ActionButton>
       <Popover>
@@ -48,19 +51,22 @@ const FontHighlight = () => {
             variant="flat"
             isIconOnly
             size="sm"
-            className={
-              editor.isActive("highlight", { color: color }) ? "is-active" : ""
-            }
+            className={editor.isActive("highlight") ? "" : ""}
           >
             <ActionButton
               contentForMac={<p>Text background color</p>}
               contentForWindows={<p>Text background color</p>}
             >
-              <BaselineIcon
-                className="font-bold"
-                style={{ color: color }}
-                size={16}
-              />
+              <span
+                style={{ backgroundColor: color }}
+                className="rounded-[2px]"
+              >
+                <BaselineIcon
+                  style={{ color: "#000000" }}
+                  className="font-bold m-0.5 "
+                  size={16}
+                />
+              </span>
             </ActionButton>
           </Button>
         </PopoverTrigger>
