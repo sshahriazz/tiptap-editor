@@ -115,32 +115,6 @@ export const GROUPS: Group[] = [
                 },
             },
             {
-                name: "image",
-                label: "Image",
-                iconName: "Image",
-                description: "Insert an image",
-                aliases: ["img"],
-                action: (editor) => {
-                    editor.chain().focus().setImageUpload().run();
-                },
-            },
-            {
-                name: "columns",
-                label: "Columns",
-                iconName: "Columns2",
-                description: "Add two column content",
-                aliases: ["cols"],
-                shouldBeHidden: (editor) => editor.isActive("columns"),
-                action: (editor) => {
-                    editor
-                        .chain()
-                        .focus()
-                        .setColumns()
-                        .focus(editor.state.selection.head - 1)
-                        .run();
-                },
-            },
-            {
                 name: "horizontalRule",
                 label: "Horizontal Rule",
                 iconName: "Minus",
@@ -148,17 +122,6 @@ export const GROUPS: Group[] = [
                 aliases: ["hr"],
                 action: (editor) => {
                     editor.chain().focus().setHorizontalRule().run();
-                },
-            },
-            {
-                name: "toc",
-                label: "Table of Contents",
-                iconName: "Book",
-                aliases: ["outline"],
-                description: "Insert a table of contents",
-                shouldBeHidden: (editor) => editor.isActive("columns"),
-                action: (editor) => {
-                    editor.chain().focus().insertTableOfContents().run();
                 },
             },
         ],
