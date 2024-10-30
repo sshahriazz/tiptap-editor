@@ -45,7 +45,7 @@ const Toolbar = () => {
             editor.isActive("paragraph") ? "text-primary-500" : ""
           } `}
         >
-          <TypeIcon size={16} />
+          <span className="text-sm">P</span>
         </Button>
         <Link />
         <ImageEditDialog editor={editor} />

@@ -2,6 +2,8 @@ import {
   Button,
   Card,
   CardBody,
+  Listbox,
+  ListboxItem,
   Popover,
   PopoverContent,
   PopoverTrigger,
@@ -21,6 +23,36 @@ const BubbleMenuBar = () => {
   console.log(editor.isActive("table"), "editor?.isActive");
 
   const isTableActive = editor.isActive("table");
+  const tableActions = [
+    {
+      key: "Add Column Before",
+      action: () => editor.chain().focus().addColumnBefore().run(),
+    },
+    {
+      key: "Add Column After",
+      action: () => editor.chain().focus().addColumnAfter().run(),
+    },
+    {
+      key: "Add Row Before",
+      action: () => editor.chain().focus().addRowBefore().run(),
+    },
+    {
+      key: "Add Row After",
+      action: () => editor.chain().focus().addRowAfter().run(),
+    },
+    {
+      key: "Delete Column",
+      action: () => editor.chain().focus().deleteColumn().run(),
+    },
+    {
+      key: "Delete Row",
+      action: () => editor.chain().focus().deleteRow().run(),
+    },
+    {
+      key: "Delete Table",
+      action: () => editor.chain().focus().deleteTable().run(),
+    },
+  ];
 
   return (
     <Card className={"sticky top-0 z-50 mt-3 w-fit mx-auto mb-4"}>
@@ -40,44 +72,21 @@ const BubbleMenuBar = () => {
                   <Table size={16} />
                 </Button>
               </PopoverTrigger>
-              {/* add list here */}
               <PopoverContent>
-                <button
-                  className="bg-default/40"
-                  onClick={() => editor.chain().focus().addColumnBefore().run()}
+                <Listbox
+                  aria-label="Single selection example"
+                  variant="flat"
+                  disallowEmptySelection
+                  selectionMode="single"
+                  items={tableActions}
+                  className="p-0 py-2"
                 >
-                  Add Column Before
-                </button>
-                <button
-                  onClick={() => editor.chain().focus().addColumnAfter().run()}
-                >
-                  Add Column After
-                </button>
-                <button
-                  onClick={() => editor.chain().focus().addRowBefore().run()}
-                >
-                  Add Row Before
-                </button>
-                <button
-                  onClick={() => editor.chain().focus().addRowAfter().run()}
-                >
-                  Add Row After
-                </button>
-                <button
-                  onClick={() => editor.chain().focus().deleteColumn().run()}
-                >
-                  Delete Column
-                </button>
-                <button
-                  onClick={() => editor.chain().focus().deleteRow().run()}
-                >
-                  Delete Row
-                </button>
-                <button
-                  onClick={() => editor.chain().focus().deleteTable().run()}
-                >
-                  Delete Table
-                </button>
+                  {(item) => (
+                    <ListboxItem key={item?.key} onClick={item?.action}>
+                      {item?.key}
+                    </ListboxItem>
+                  )}
+                </Listbox>
               </PopoverContent>
             </Popover>
           </div>
