@@ -16,6 +16,11 @@ declare module '@tiptap/core' {
 }
 
 export const FontSize = TextStyle.extend({
+    addKeyboardShortcuts() {
+        return {
+            // "x": () => this.editor.commands.setFontSize(parseInt("16") += 1),
+        }
+    },
     addAttributes() {
         return {
             ...this.parent?.(),

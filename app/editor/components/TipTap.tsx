@@ -19,7 +19,6 @@ import Text from "@tiptap/extension-text";
 import Mention from "@tiptap/extension-mention";
 import TaskList from "@tiptap/extension-task-list";
 import TaskItem from "@tiptap/extension-task-item";
-
 import { BubbleMenu, EditorProvider, FloatingMenu } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import React, { useState } from "react";
@@ -37,6 +36,8 @@ import { default as BubbleMenuBar } from "./toolbar/BubbleMenuBar";
 import FloatingMenuBar from "./toolbar/FloatingMenuBar";
 import { FontSize } from "@/app/editor/extensions/fontsize";
 import CharactersAndWordCount from "./toolbar/CharactersAndWordCount";
+import { SlashCommand } from "../extensions/SlashCommand";
+import Placeholder from "@tiptap/extension-placeholder";
 
 // const PdfGeneration = dynamic(() => import('@/app/editor/components/PDFGeneration'), {ssr: false});
 
@@ -172,9 +173,16 @@ const Tiptap = () => {
         setItems(content);
       },
     }),
+
     Typography,
     TextStyle,
     Color,
+    Placeholder.configure({
+      includeChildren: true,
+      showOnlyCurrent: false,
+      placeholder: () => "",
+    }),
+    SlashCommand,
   ];
   const content = `<p>Hello World! 🌎️</p> 
   <h1>Discography</h1>
@@ -200,20 +208,7 @@ const Tiptap = () => {
         <li data-type="taskItem" data-checked="false">eggs</li>
         <li data-type="taskItem" data-checked="false">butter</li>
       </ul>
-    <table>
-          <tbody>
-            <tr>
-              <th>Name</th>
-              <th colSpan="3">Description</th>
-            </tr>
-            <tr>
-              <td>Cyndi Lauper</td>
-              <td>Singer</td>
-              <td>Songwriter</td>
-              <td>Actress</td>
-            </tr>
-          </tbody>
-        </table>`;
+    <table>`;
   // prose-sm sm:prose-base lg:prose-lg xl:prose-2xl prose-li:text-sm prose-ul:text-sm prose-ol:text-sm prose-a:text-sm
   return (
     <div className="w-full flex justify-between">
