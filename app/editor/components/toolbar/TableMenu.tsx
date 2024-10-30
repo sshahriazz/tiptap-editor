@@ -9,6 +9,7 @@ const TableMenu = () => {
     if (!editor) {
         return null;
     }
+
     return (
         <ButtonGroup>
             <Button

@@ -1,23 +1,23 @@
 import { ImageEditDialog } from "@/app/editor/components/image/ImageEditDialog";
+import FontSize from "@/app/editor/extensions/fontsize/FontSize";
 import { Card, CardBody } from "@nextui-org/card";
 import { Button } from "@nextui-org/react";
 import { useCurrentEditor } from "@tiptap/react";
 import { TypeIcon } from "lucide-react";
+import FontFamily from "./FontFamily";
 import FontHighlight from "./FontHighlight";
 import FontStyle from "./FontStyle";
+import HardBreak from "./HardBreak";
 import Heading from "./Heading";
 import HorizontalRule from "./HorizontalRule";
 import Link from "./Link";
 import LIstItem from "./ListItem";
+import SubAndSupScript from "./SubAndSupScript";
 import TableMenu from "./TableMenu";
+import TaskList from "./TaskList";
 import TextAlignment from "./TextAlignment";
 import TextColorButton from "./TextColorButton";
 import UndoRedo from "./UndoRedo";
-import FontSize from "@/app/editor/extensions/fontsize/FontSize";
-import HardBreak from "./HardBreak";
-import SubAndSupScript from "./SubAndSupScript";
-import FontFamily from "./FontFamily";
-import TaskList from "./TaskList";
 
 const Toolbar = () => {
   const { editor } = useCurrentEditor();

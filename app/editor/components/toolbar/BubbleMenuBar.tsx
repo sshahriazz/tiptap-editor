@@ -9,9 +9,9 @@ import {
   PopoverTrigger,
 } from "@nextui-org/react";
 import { useCurrentEditor } from "@tiptap/react";
-import { Table } from "lucide-react";
 import FontStyle from "./FontStyle";
 import Link from "./Link";
+import { Table } from "lucide-react";
 
 const BubbleMenuBar = () => {
   const { editor } = useCurrentEditor();

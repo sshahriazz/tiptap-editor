@@ -1,39 +1,42 @@
 "use client";
 
-import CharacterCount from "@tiptap/extension-character-count";
-import { Color } from "@tiptap/extension-color";
-import Highlight from "@tiptap/extension-highlight";
-import TextAlign from "@tiptap/extension-text-align";
-import TextStyle from "@tiptap/extension-text-style";
-import Typography from "@tiptap/extension-typography";
-import Underline from "@tiptap/extension-underline";
-import Subscript from "@tiptap/extension-subscript";
-import Superscript from "@tiptap/extension-superscript";
-import FontFamily from "@tiptap/extension-font-family";
-import Paragraph from "@tiptap/extension-paragraph";
-import Text from "@tiptap/extension-text";
-import Mention from "@tiptap/extension-mention";
-import TaskList from "@tiptap/extension-task-list";
-import TaskItem from "@tiptap/extension-task-item";
-import { BubbleMenu, EditorProvider } from "@tiptap/react";
-import StarterKit from "@tiptap/starter-kit";
-import React, { useState } from "react";
-import { ToC } from "./TOC";
-import Toolbar from "./toolbar/Toolbar";
-import HardBreak from "@tiptap/extension-hard-break";
-import { Image } from "../extensions/image/Image";
+import { FontSize } from "@/app/editor/extensions/fontsize";
 import { fileToBase64, randomId } from "@/app/editor/extensions/utils";
 import { FileHandler } from "@tiptap-pro/extension-file-handler";
 import TableOfContents, {
   getHierarchicalIndexes,
 } from "@tiptap-pro/extension-table-of-contents";
+import CharacterCount from "@tiptap/extension-character-count";
+import { Color } from "@tiptap/extension-color";
+import FontFamily from "@tiptap/extension-font-family";
+import HardBreak from "@tiptap/extension-hard-break";
+import Highlight from "@tiptap/extension-highlight";
 import { Link } from "@tiptap/extension-link";
-import { default as BubbleMenuBar } from "./toolbar/BubbleMenuBar";
-import { FontSize } from "@/app/editor/extensions/fontsize";
-import CharactersAndWordCount from "./toolbar/CharactersAndWordCount";
-import { SlashCommand } from "../extensions/SlashCommand";
+import Mention from "@tiptap/extension-mention";
+import Paragraph from "@tiptap/extension-paragraph";
 import Placeholder from "@tiptap/extension-placeholder";
-import { Table, TableCell, TableHeader, TableRow } from "../extensions/Table";
+import Subscript from "@tiptap/extension-subscript";
+import Superscript from "@tiptap/extension-superscript";
+import Table from "@tiptap/extension-table";
+import TableCell from "@tiptap/extension-table-cell";
+import TableHeader from "@tiptap/extension-table-header";
+import TableRow from "@tiptap/extension-table-row";
+import TaskItem from "@tiptap/extension-task-item";
+import TaskList from "@tiptap/extension-task-list";
+import Text from "@tiptap/extension-text";
+import TextAlign from "@tiptap/extension-text-align";
+import TextStyle from "@tiptap/extension-text-style";
+import Typography from "@tiptap/extension-typography";
+import Underline from "@tiptap/extension-underline";
+import { BubbleMenu, EditorProvider } from "@tiptap/react";
+import StarterKit from "@tiptap/starter-kit";
+import React, { useState } from "react";
+import { Image } from "../extensions/image/Image";
+import { SlashCommand } from "../extensions/SlashCommand";
+import { ToC } from "./TOC";
+import { default as BubbleMenuBar } from "./toolbar/BubbleMenuBar";
+import CharactersAndWordCount from "./toolbar/CharactersAndWordCount";
+import Toolbar from "./toolbar/Toolbar";
 
 // const PdfGeneration = dynamic(() => import('@/app/editor/components/PDFGeneration'), {ssr: false});
 
@@ -180,7 +183,6 @@ const Tiptap = () => {
   ];
   const content = `<p>Hello World! 🌎️</p> 
   <h1>Discography</h1>
-  <img src="/image-dog.jpeg" alt="image" />
     <h2>Top Albums</h2>
     <ul>
         <li><a href="https://en.wikipedia.org/wiki/Thriller_(album)" target="_blank">Thriller - Michael Jackson</a></li>
