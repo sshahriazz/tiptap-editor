@@ -3,10 +3,6 @@
 import CharacterCount from "@tiptap/extension-character-count";
 import { Color } from "@tiptap/extension-color";
 import Highlight from "@tiptap/extension-highlight";
-import Table from "@tiptap/extension-table";
-import TableCell from "@tiptap/extension-table-cell";
-import TableHeader from "@tiptap/extension-table-header";
-import TableRow from "@tiptap/extension-table-row";
 import TextAlign from "@tiptap/extension-text-align";
 import TextStyle from "@tiptap/extension-text-style";
 import Typography from "@tiptap/extension-typography";
@@ -38,6 +34,7 @@ import { FontSize } from "@/app/editor/extensions/fontsize";
 import CharactersAndWordCount from "./toolbar/CharactersAndWordCount";
 import { SlashCommand } from "../extensions/SlashCommand";
 import Placeholder from "@tiptap/extension-placeholder";
+import { Table, TableCell, TableHeader, TableRow } from "../extensions/Table";
 
 // const PdfGeneration = dynamic(() => import('@/app/editor/components/PDFGeneration'), {ssr: false});
 
@@ -153,9 +150,7 @@ const Tiptap = () => {
       },
     }),
     Highlight,
-    Table.configure({
-      resizable: true,
-    }),
+    Table,
     TableCell,
     TableHeader,
     TableRow,
