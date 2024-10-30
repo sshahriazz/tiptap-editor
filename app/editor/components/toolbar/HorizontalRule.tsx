@@ -1,14 +1,9 @@
-import { Button } from "@nextui-org/react";
-import { useCurrentEditor } from "@tiptap/react";
-import { Minus } from "lucide-react";
+import {Button} from "@nextui-org/react";
+import {Minus} from "lucide-react";
 import ActionButton from "../ActionButton";
 
-const HorizontalRule = () => {
-    const { editor } = useCurrentEditor();
+const HorizontalRule = ({editor}: any) => {
 
-    if (!editor) {
-        return null;
-    }
     return (
         <ActionButton
             contentForMac={<p>Divider</p>}
@@ -20,7 +15,7 @@ const HorizontalRule = () => {
                 size="sm"
                 onPress={() => editor.chain().focus().setHorizontalRule().run()}
             >
-                <Minus />
+                <Minus/>
             </Button>
         </ActionButton>
     );
