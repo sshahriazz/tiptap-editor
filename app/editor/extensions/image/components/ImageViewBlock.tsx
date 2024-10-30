@@ -18,7 +18,7 @@ import {
 import { useImageActions } from "@/app/editor/extensions/image/hooks/useImageActions";
 import { ResizeHandle } from "@/app/editor/extensions/image/components/ReseizeHandle";
 
-const MAX_HEIGHT = 600;
+const MAX_HEIGHT = 800;
 const MIN_HEIGHT = 120;
 const MIN_WIDTH = 120;
 
