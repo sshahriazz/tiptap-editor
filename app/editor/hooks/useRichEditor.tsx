@@ -10,12 +10,8 @@ import Mention from "@tiptap/extension-mention";
 import TaskList from "@tiptap/extension-task-list";
 import TaskItem from "@tiptap/extension-task-item";
 import {FontSize} from "@/app/editor/extensions/fontsize";
-import HardBreak from "@tiptap/extension-hard-break";
 import Subscript from "@tiptap/extension-subscript";
 import Superscript from "@tiptap/extension-superscript";
-import Paragraph from "@tiptap/extension-paragraph";
-import Text from "@tiptap/extension-text";
-import TextStyle from "@tiptap/extension-text-style";
 import FontFamily from "@tiptap/extension-font-family";
 import CharacterCount from "@tiptap/extension-character-count";
 import {FileHandler} from "@tiptap-pro/extension-file-handler";
@@ -43,9 +39,9 @@ declare global {
 const extensions = [
     StarterKit,
     Underline,
-    Highlight.configure({
-        multicolor: true,
-    }),
+    // Highlight.configure({
+    //     multicolor: true,
+    // }),
     Mention.configure({
         HTMLAttributes: {
             class: "mention",
@@ -58,12 +54,8 @@ const extensions = [
     }),
 
     FontSize,
-    HardBreak,
     Subscript,
     Superscript,
-    Paragraph,
-    Text,
-    TextStyle,
     FontFamily,
     CharacterCount,
     FileHandler.configure({
@@ -114,7 +106,6 @@ const extensions = [
             });
         },
     }),
-    // Image,
     Image.configure({
         allowedMimeTypes: ["image/*"],
         maxFileSize: 5 * 1024 * 1024,
@@ -144,7 +135,9 @@ const extensions = [
             });
         },
     }),
-    Highlight,
+    Highlight.configure({
+        multicolor: true,
+    }),
     Table,
     TableCell,
     TableHeader,
@@ -157,14 +150,7 @@ const extensions = [
     TextAlign.configure({
         types: ["heading", "paragraph"],
     }),
-    // TableOfContents.configure({
-    //     getIndex: getHierarchicalIndexes,
-    //     onUpdate(content) {
-    //         setItems(content);
-    //     },
-    // }),
     Typography,
-    TextStyle,
     Color,
     Placeholder.configure({
         includeChildren: true,
