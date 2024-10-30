@@ -1,6 +1,6 @@
 import * as React from "react";
 import { cn } from "@nextui-org/react";
-import { ArrowUpLeft, ArrowUpRight, Scaling } from "lucide-react";
+import { Scaling } from "lucide-react";
 
 interface ResizeProps extends React.HTMLAttributes<HTMLDivElement> {
   isResizing?: boolean;
