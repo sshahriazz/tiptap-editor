@@ -18,7 +18,6 @@ const TaskList = () => {
           variant="flat"
           className="px-1"
           onPress={() => editor.chain().focus().toggleTaskList().run()}
-          isIconOnly
         >
           <ListTodo size={16} />
         </Button>
