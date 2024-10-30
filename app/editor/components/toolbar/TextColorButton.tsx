@@ -127,7 +127,10 @@ const TextColorButton = () => {
               contentForMac={<p>Text color</p>}
               contentForWindows={<p>Text color</p>}
             >
-              <Baseline size={16} />
+              <Baseline
+                style={{ color: editor.getAttributes("textStyle").color }}
+                size={16}
+              />
             </ActionButton>
           </Button>
         </PopoverTrigger>
