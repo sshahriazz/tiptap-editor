@@ -1,37 +1,42 @@
 "use client";
 
+import { FontSize } from "@/app/editor/extensions/fontsize";
+import { fileToBase64, randomId } from "@/app/editor/extensions/utils";
+import { FileHandler } from "@tiptap-pro/extension-file-handler";
+import TableOfContents, {
+    getHierarchicalIndexes,
+} from "@tiptap-pro/extension-table-of-contents";
 import CharacterCount from "@tiptap/extension-character-count";
-import {Color} from "@tiptap/extension-color";
+import { Color } from "@tiptap/extension-color";
+import FontFamily from "@tiptap/extension-font-family";
+import HardBreak from "@tiptap/extension-hard-break";
 import Highlight from "@tiptap/extension-highlight";
+import { Link } from "@tiptap/extension-link";
+import Mention from "@tiptap/extension-mention";
+import Paragraph from "@tiptap/extension-paragraph";
+import Placeholder from "@tiptap/extension-placeholder";
+import Subscript from "@tiptap/extension-subscript";
+import Superscript from "@tiptap/extension-superscript";
+import Table from "@tiptap/extension-table";
+import TableCell from "@tiptap/extension-table-cell";
+import TableHeader from "@tiptap/extension-table-header";
+import TableRow from "@tiptap/extension-table-row";
+import TaskItem from "@tiptap/extension-task-item";
+import TaskList from "@tiptap/extension-task-list";
+import Text from "@tiptap/extension-text";
 import TextAlign from "@tiptap/extension-text-align";
 import TextStyle from "@tiptap/extension-text-style";
 import Typography from "@tiptap/extension-typography";
 import Underline from "@tiptap/extension-underline";
-import Subscript from "@tiptap/extension-subscript";
-import Superscript from "@tiptap/extension-superscript";
-import FontFamily from "@tiptap/extension-font-family";
-import Paragraph from "@tiptap/extension-paragraph";
-import Text from "@tiptap/extension-text";
-import Mention from "@tiptap/extension-mention";
-import TaskList from "@tiptap/extension-task-list";
-import TaskItem from "@tiptap/extension-task-item";
-import {BubbleMenu, EditorProvider} from "@tiptap/react";
+import { BubbleMenu, EditorProvider } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
-import React, {useState} from "react";
-import {ToC} from "./TOC";
-import Toolbar from "./toolbar/Toolbar";
-import HardBreak from "@tiptap/extension-hard-break";
-import {Image} from "../extensions/image/Image";
-import {fileToBase64, randomId} from "@/app/editor/extensions/utils";
-import {FileHandler} from "@tiptap-pro/extension-file-handler";
-import TableOfContents, {getHierarchicalIndexes,} from "@tiptap-pro/extension-table-of-contents";
-import {Link} from "@tiptap/extension-link";
-import {default as BubbleMenuBar} from "./toolbar/BubbleMenuBar";
-import {FontSize} from "@/app/editor/extensions/fontsize";
+import React, { useState } from "react";
+import { Image } from "../extensions/image/Image";
+import { SlashCommand } from "../extensions/SlashCommand";
+import { ToC } from "./TOC";
+import { default as BubbleMenuBar } from "./toolbar/BubbleMenuBar";
 import CharactersAndWordCount from "./toolbar/CharactersAndWordCount";
-import {SlashCommand} from "../extensions/SlashCommand";
-import Placeholder from "@tiptap/extension-placeholder";
-import {Table, TableCell, TableHeader, TableRow} from "../extensions/Table";
+import Toolbar from "./toolbar/Toolbar";
 
 // const PdfGeneration = dynamic(() => import('@/app/editor/components/PDFGeneration'), {ssr: false});
 
@@ -56,7 +61,7 @@ const Tiptap = () => {
         TaskItem.configure({
             nested: true,
         }),
-        
+
         FontSize,
         HardBreak,
         Subscript,
@@ -69,7 +74,12 @@ const Tiptap = () => {
             limit,
         }),
         FileHandler.configure({
-            allowedMimeTypes: ["image/png", "image/jpeg", "image/gif", "image/webp"],
+            allowedMimeTypes: [
+                "image/png",
+                "image/jpeg",
+                "image/gif",
+                "image/webp",
+            ],
             onDrop: (currentEditor, files, pos) => {
                 files.forEach((file) => {
                     const fileReader = new FileReader();
@@ -104,12 +114,15 @@ const Tiptap = () => {
                     fileReader.onload = () => {
                         currentEditor
                             .chain()
-                            .insertContentAt(currentEditor.state.selection.anchor, {
-                                type: "image",
-                                attrs: {
-                                    src: fileReader.result,
-                                },
-                            })
+                            .insertContentAt(
+                                currentEditor.state.selection.anchor,
+                                {
+                                    type: "image",
+                                    attrs: {
+                                        src: fileReader.result,
+                                    },
+                                }
+                            )
                             .focus()
                             .run();
                     };
@@ -132,10 +145,10 @@ const Tiptap = () => {
 
                 // either return { id: string | number, src: string } or just src
                 // return src;
-                return {id: randomId(), src};
+                return { id: randomId(), src };
             },
-            onImageRemoved({id, src}) {
-                console.log("Image removed", {id, src});
+            onImageRemoved({ id, src }) {
+                console.log("Image removed", { id, src });
             },
             onValidationError(errors) {
                 errors.forEach((error) => {
@@ -209,16 +222,15 @@ const Tiptap = () => {
                     immediatelyRender={false}
                     editorProps={{
                         attributes: {
-                            class:
-                                "prose prose-sm sm:prose-base lg:prose-lg xl:prose-2xl max-w-[1150px] mx-auto focus:outline-none border p-24 bg-white rounded-md shadow-md",
+                            class: "prose prose-sm sm:prose-base lg:prose-lg xl:prose-2xl max-w-[1150px] mx-auto focus:outline-none border p-24 bg-white rounded-md shadow-md",
                         },
                     }}
-                    slotBefore={<Toolbar/>}
+                    slotBefore={<Toolbar />}
                     extensions={extensions}
                     content={content}
                 >
-                    <BubbleMenu editor={null} tippyOptions={{duration: 100}}>
-                        <BubbleMenuBar/>
+                    <BubbleMenu editor={null} tippyOptions={{ duration: 100 }}>
+                        <BubbleMenuBar />
                     </BubbleMenu>
                     {/*<FloatingMenu*/}
                     {/*  editor={null}*/}
@@ -226,8 +238,8 @@ const Tiptap = () => {
                     {/*>*/}
                     {/*  <FloatingMenuBar />*/}
                     {/*</FloatingMenu>*/}
-                    <MemorizedToC items={items}/>
-                    <CharactersAndWordCount/>
+                    <MemorizedToC items={items} />
+                    <CharactersAndWordCount />
                 </EditorProvider>
             </div>
         </div>
