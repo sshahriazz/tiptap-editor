@@ -2,7 +2,7 @@ import { useCurrentEditor } from "@tiptap/react";
 import React from "react";
 import ActionButton from "../ActionButton";
 import { Button } from "@nextui-org/react";
-import { ListChecks } from "lucide-react";
+import { ListChecks, ListTodo } from "lucide-react";
 
 const TaskList = () => {
   const { editor } = useCurrentEditor();
@@ -13,11 +13,13 @@ const TaskList = () => {
     <div>
       <ActionButton contentForMac={"Task List"} contentForWindows={"Task List"}>
         <Button
+          isIconOnly
           size="sm"
           variant="flat"
+          className="px-1"
           onPress={() => editor.chain().focus().toggleTaskList().run()}
         >
-          <ListChecks size={16} />
+          <ListTodo size={16} />
         </Button>
       </ActionButton>
     </div>

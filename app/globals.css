@@ -85,7 +85,7 @@ th {
     padding: 0;
 
     li {
-      align-items: center;
+      /* align-items: center; */
       display: flex;
 
       > label {
@@ -101,6 +101,9 @@ th {
 
     input[type="checkbox"] {
       cursor: pointer;
+      width: 16px;
+      height: 16px;
+      padding-bottom: 4px;
     }
   }
 }

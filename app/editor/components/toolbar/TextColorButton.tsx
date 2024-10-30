@@ -96,6 +96,7 @@ const colors = [
 const TextColorButton = () => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [color, setColor] = useState<string>("#000000");
 
   const { editor } = useCurrentEditor();
   if (!editor) {
@@ -118,7 +119,7 @@ const TextColorButton = () => {
               editor.isActive("textStyle", {
                 color: editor.getAttributes("textStyle").color,
               })
-                ? "text-primary-500"
+                ? `text-${color}`
                 : ""
             } `}
             isIconOnly
@@ -142,9 +143,10 @@ const TextColorButton = () => {
                       border: `1px solid ${color.border}`,
                     }}
                     key={color.hex}
-                    onClick={() =>
-                      editor.chain().focus().setColor(color?.hex).run()
-                    }
+                    onClick={() => {
+                      editor.chain().focus().setColor(color?.hex).run();
+                      setColor(color?.hex);
+                    }}
                     className={
                       editor.isActive("textStyle", {
                         color: color?.hex,

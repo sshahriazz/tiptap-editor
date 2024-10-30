@@ -20,45 +20,47 @@ import TextColorButton from "./TextColorButton";
 import UndoRedo from "./UndoRedo";
 
 const Toolbar = () => {
-    const { editor } = useCurrentEditor();
-    if (!editor) {
-        return null;
-    }
+  const { editor } = useCurrentEditor();
+  if (!editor) {
+    return null;
+  }
 
-    return (
-        <Card className={"sticky top-0 z-50 mt-3 w-fit mx-auto mb-4"}>
-            <CardBody className={"flex-row gap-3 shadow-sm"}>
-                <UndoRedo />
-                <FontStyle />
-                <Heading />
-                <FontFamily />
-                <FontSize />
-                <HardBreak />
-                <Button
-                    variant="flat"
-                    size={"sm"}
-                    isIconOnly
-                    onClick={() => editor.chain().focus().setParagraph().run()}
-                    className={`${
-                        editor.isActive("paragraph") ? "text-primary-500" : ""
-                    } `}
-                >
-                    <TypeIcon size={16} />
-                </Button>
-                <Link />
-                <ImageEditDialog editor={editor} />
-                <TextColorButton />
-                <TextAlignment />
-                <SubAndSupScript />
-                <LIstItem />
-                <TaskList />
-                <TableMenu />
-                <HorizontalRule />
-                <FontHighlight />
-                {/* <CharactersAndWordCount /> */}
-            </CardBody>
-        </Card>
-    );
+  console.log(editor.getJSON(), "getjosn");
+
+  return (
+    <Card className={"sticky top-0 z-50 mt-3 w-fit mx-auto mb-4"}>
+      <CardBody className={"flex-row gap-3 shadow-sm"}>
+        <UndoRedo />
+        <FontStyle />
+        <Heading />
+        <FontFamily />
+        <FontSize />
+        <HardBreak />
+        <Button
+          variant="flat"
+          size={"sm"}
+          isIconOnly
+          onClick={() => editor.chain().focus().setParagraph().run()}
+          className={`${
+            editor.isActive("paragraph") ? "text-primary-500" : ""
+          } `}
+        >
+          <span className="text-sm">P</span>
+        </Button>
+        <Link />
+        <ImageEditDialog editor={editor} />
+        <TextColorButton />
+        <TextAlignment />
+        <SubAndSupScript />
+        <LIstItem />
+        <TaskList />
+        <TableMenu />
+        <HorizontalRule />
+        <FontHighlight />
+        {/* <CharactersAndWordCount /> */}
+      </CardBody>
+    </Card>
+  );
 };
 
 export default Toolbar;

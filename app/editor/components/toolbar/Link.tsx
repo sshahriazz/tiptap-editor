@@ -97,7 +97,10 @@ function Link() {
         </PopoverTrigger>
         <PopoverContent>
           {() => (
-            <form onSubmit={setLink} className="px-1 py-2">
+            <form
+              onSubmit={setLink}
+              className="px-1 py-2 flex flex-col gap-2 w-[260px]"
+            >
               <Input
                 placeholder="Enter URL"
                 onChange={(e) => {
@@ -105,7 +108,15 @@ function Link() {
                 }}
                 type="link"
               />
-              <Button type="submit">Submit</Button>
+              <Button
+                radius="sm"
+                variant="solid"
+                color="primary"
+                className="rounded-lg"
+                type="submit"
+              >
+                Submit
+              </Button>
             </form>
           )}
         </PopoverContent>
