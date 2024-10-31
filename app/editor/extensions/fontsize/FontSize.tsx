@@ -1,145 +1,173 @@
 "use client";
 
-import {useCallback, useEffect, useState} from "react";
-import {Minus, Plus} from "lucide-react";
-import {Button, ButtonGroup, Input} from "@nextui-org/react";
+import { useCallback, useState } from "react";
+import { Minus, Plus } from "lucide-react";
+import { Button, ButtonGroup, Input } from "@nextui-org/react";
 import ActionButton from "../../components/ActionButton";
 
-export default function FontSize({editor}: any) {
+export default function FontSize({ editor }: any) {
+  const [inputValue, setInputValue] = useState("16");
+  const [isValid, setIsValid] = useState(true);
 
+  const getFontSize = useCallback(() => {
+    return editor!.getAttributes("textStyle").fontSize ?? "16";
+  }, [editor]);
 
-    const [inputValue, setInputValue] = useState("16");
-    const [isValid, setIsValid] = useState(true);
+  //   useEffect(() => {
+  //     console.log("logging");
+  //     setInputValue(getFontSize() ?? "16");
+  //     console.log(getFontSize(), "fontSize");
+  //   }, [getFontSize]);
 
-    const getFontSize = useCallback(() => {
-        return editor!.getAttributes("textStyle").fontSize ?? "16";
-    }, [editor]);
+  const parseInput = (value: string): number => {
+    const num = parseFloat(value);
+    return /^\d*\.?\d+$/.test(value) ? num : NaN;
+  };
 
-    useEffect(() => {
-        console.log("logging");
-        setInputValue(getFontSize() ?? "16");
-        console.log(getFontSize(), "fontSize");
-    }, [getFontSize]);
+  const updateFontSize = useCallback((newSize: number) => {
+    let validSize;
 
-    const parseInput = (value: string): number => {
-        const num = parseFloat(value);
-        return /^\d*\.?\d+$/.test(value) ? num : NaN;
-    };
+    if (newSize >= 10 && newSize <= 99) validSize = Math.max(10, newSize);
+    else if (newSize < 10) validSize = Math.min(10, newSize);
+    else validSize = 16;
 
-    const updateFontSize = useCallback((newSize: number) => {
-        const validSize = Math.max(1, newSize);
-        setInputValue(validSize.toString());
-        setIsValid(true);
-    }, []);
+    setInputValue(validSize.toString());
+    setIsValid(true);
+  }, []);
 
-    const changeFontSize = (delta: number) => {
-        const size = parseInput(inputValue);
-        updateFontSize(size + delta);
-    };
+  const changeFontSize = (delta: number) => {
+    const currentFontSize = parseInput(getFontSize());
+    const size = isNaN(currentFontSize)
+      ? parseInput(inputValue)
+      : currentFontSize;
 
-    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const value = e.target.value;
-        setInputValue(value);
+    if (!isNaN(size)) {
+      const newSize = size + delta;
+      updateFontSize(newSize);
+      editor.chain().focus().setFontSize(newSize).run();
+    }
+  };
 
-        const size = parseInput(value);
-        setIsValid(!isNaN(size) && size > 0);
-    };
+  const handleInputChange = (
+    e:
+      | React.ChangeEvent<HTMLInputElement>
+      | React.KeyboardEvent<HTMLInputElement>
+  ) => {
+    const value = (e.target as HTMLInputElement).value;
+    setInputValue(value);
 
-    const handleInputBlur = () => {
-        const size = parseInput(inputValue);
-        if (isNaN(size) || size < 1) {
-            updateFontSize(16);
-        } else {
-            updateFontSize(size);
+    const size = parseInput(value);
+    setIsValid(!isNaN(size) && size > 10);
+  };
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      const size = parseInput(inputValue);
+      if (size > 10) {
+        updateFontSize(size);
+        editor.chain().focus().setFontSize(size).run();
+      } else {
+        setInputValue("16");
+        setIsValid(false);
+      }
+    } else {
+      handleInputChange(e);
+    }
+  };
+  //   const handleInputBlur = () => {
+  //     const size = parseInput(inputValue);
+  //     if (isNaN(size) || size < 10) {
+  //       updateFontSize(16);
+  //     } else {
+  //       updateFontSize(size);
+  //     }
+  //   };
+
+  //   useEffect(() => {
+  //     if (isValid && editor) {
+  //       editor.chain().focus().setFontSize(inputValue).run();
+  //     }
+  //   }, [editor, isValid, inputValue]);
+
+  return (
+    <ButtonGroup>
+      <ActionButton
+        contentForMac={
+          <div className="flex items-center">
+            <p className="mr-2">Font</p>
+          </div>
         }
-    };
-
-    useEffect(() => {
-        if (isValid && editor) {
-            editor.chain().focus().setFontSize(inputValue).run();
+        contentForWindows={
+          <div className="flex items-center">
+            <p className="mr-2">Bold</p>
+          </div>
         }
-    }, [editor, isValid, inputValue]);
-
-    return (
-        <ButtonGroup>
-            <ActionButton
-                contentForMac={
-                    <div className="flex items-center">
-                        <p className="mr-2">Font</p>
-                    </div>
-                }
-                contentForWindows={
-                    <div className="flex items-center">
-                        <p className="mr-2">Bold</p>
-                    </div>
-                }
-            >
-                <Button
-                    variant={"flat"}
-                    size="sm"
-                    isIconOnly
-                    onClick={() => changeFontSize(-1)}
-                    aria-label="Decrease font size"
-                >
-                    <Minus className="h-4 w-4"/>
-                </Button>
-            </ActionButton>
-            <ActionButton
-                contentForMac={
-                    <div className="flex items-center">
-                        <p className="mr-2">Font size</p>
-                    </div>
-                }
-                contentForWindows={
-                    <div className="flex items-center">
-                        <p className="mr-2">Italic</p>
-                        <p>ctrl + I</p>
-                    </div>
-                }
-            >
-                <Input
-                    type="text"
-                    value={inputValue}
-                    onChange={handleInputChange}
-                    onBlur={handleInputBlur}
-                    size="sm"
-                    radius="none"
-                    className={`w-9 text-center ${
-                        isValid ? "text-primary" : "text-red-500"
-                    }`}
-                    classNames={{
-                        base: "h-8  ",
-                        mainWrapper: "h-8",
-                        input: ["text-small ,bg-default/40"],
-                        inputWrapper: "h-8 bg-default/40",
-                    }}
-                    aria-label="Font size"
-                    aria-invalid={!isValid}
-                    style={{color: isValid ? "inherit" : "red"}}
-                />
-            </ActionButton>
-            <ActionButton
-                contentForMac={
-                    <div className="flex items-center">
-                        <p className="mr-2">Font</p>
-                    </div>
-                }
-                contentForWindows={
-                    <div className="flex items-center">
-                        <p className="mr-2">Font </p>
-                    </div>
-                }
-            >
-                <Button
-                    variant={"flat"}
-                    size={"sm"}
-                    isIconOnly
-                    onClick={() => changeFontSize(1)}
-                    aria-label="Increase font size"
-                >
-                    <Plus className="h-4 w-4"/>
-                </Button>
-            </ActionButton>
-        </ButtonGroup>
-    );
+      >
+        <Button
+          variant={"flat"}
+          size="sm"
+          isIconOnly
+          onClick={() => changeFontSize(-1)}
+          aria-label="Decrease font size"
+        >
+          <Minus className="h-4 w-4" />
+        </Button>
+      </ActionButton>
+      <ActionButton
+        contentForMac={
+          <div className="flex items-center">
+            <p className="mr-2">Font size decrease</p>
+          </div>
+        }
+        contentForWindows={
+          <div className="flex items-center">
+            <p className="mr-2">Font size decrease</p>
+          </div>
+        }
+      >
+        <Input
+          type="text"
+          value={inputValue}
+          onChange={handleInputChange}
+          onKeyDown={handleKeyDown}
+          //onBlur={handleInputBlur}
+          size="sm"
+          radius="none"
+          className={`w-9 text-center ${
+            isValid ? "text-primary" : "text-red-500"
+          }`}
+          classNames={{
+            base: "h-8  ",
+            mainWrapper: "h-8",
+            input: ["text-small ,bg-default/40"],
+            inputWrapper: "h-8 bg-default/40",
+          }}
+          aria-label="Font size"
+          aria-invalid={!isValid}
+          style={{ color: isValid ? "inherit" : "red" }}
+        />
+      </ActionButton>
+      <ActionButton
+        contentForMac={
+          <div className="flex items-center">
+            <p className="mr-2">Font size increase</p>
+          </div>
+        }
+        contentForWindows={
+          <div className="flex items-center">
+            <p className="mr-2">Font size increase</p>
+          </div>
+        }
+      >
+        <Button
+          variant={"flat"}
+          size={"sm"}
+          isIconOnly
+          onClick={() => changeFontSize(1)}
+          aria-label="Increase font size"
+        >
+          <Plus className="h-4 w-4" />
+        </Button>
+      </ActionButton>
+    </ButtonGroup>
+  );
 }
