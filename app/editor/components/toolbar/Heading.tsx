@@ -58,11 +58,13 @@ const Heading = ({ editor }: any) => {
             contentForMac={<p>Heading</p>}
             contentForWindows={<p>Heading</p>}
           >
-            {editor.getAttributes("heading").level ? (
-              headingIconMapper[`H${editor.getAttributes("heading").level}`]
-            ) : (
-              <HeadingIcon size={16} />
-            )}
+            <span className="text-xs">
+              {editor.getAttributes("heading").level ? (
+                headingIconMapper[`H${editor.getAttributes("heading").level}`]
+              ) : (
+                <HeadingIcon size={14} className="font-bold" />
+              )}
+            </span>
           </ActionButton>
         </Button>
       </PopoverTrigger>

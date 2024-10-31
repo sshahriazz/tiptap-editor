@@ -34,173 +34,169 @@ import { useEffect } from "react";
 import Document from "../extensions/Document/Document";
 
 declare global {
-    interface Window {
-        editor: Editor | null;
-    }
+  interface Window {
+    editor: Editor | null;
+  }
 }
 
 const extensions = [
-    Document,
-    StarterKit.configure({
-        document: false,
-    }),
-    Columns,
-    Underline,
-    Mention.configure({
-        HTMLAttributes: {
-            class: "mention",
-        },
-        //suggestion,
-    }),
-    TaskList,
-    Column,
-    TaskItem.configure({
-        nested: true,
-    }),
-    FontSize,
-    Subscript,
-    Superscript,
-    FontFamily,
-    CharacterCount,
-    FileHandler.configure({
-        allowedMimeTypes: [
-            "image/png",
-            "image/jpeg",
-            "image/gif",
-            "image/webp",
-        ],
-        onDrop: (currentEditor, files, pos) => {
-            files.forEach((file) => {
-                const fileReader = new FileReader();
+  Document,
+  StarterKit.configure({
+    document: false,
+  }),
+  Columns,
+  Underline,
+  Mention.configure({
+    HTMLAttributes: {
+      class: "mention",
+    },
+    //suggestion,
+  }),
+  TaskList,
+  Column,
+  TaskItem.configure({
+    nested: true,
+  }),
+  FontSize,
+  Subscript,
+  Superscript,
+  FontFamily,
+  CharacterCount,
+  FileHandler.configure({
+    allowedMimeTypes: ["image/png", "image/jpeg", "image/gif", "image/webp"],
+    onDrop: (currentEditor, files, pos) => {
+      files.forEach((file) => {
+        const fileReader = new FileReader();
 
-                fileReader.readAsDataURL(file);
-                fileReader.onload = () => {
-                    currentEditor
-                        .chain()
-                        .insertContentAt(pos, {
-                            type: "image",
-                            attrs: {
-                                src: fileReader.result,
-                            },
-                        })
-                        .focus()
-                        .run();
-                };
-            });
-        },
-        onPaste: (currentEditor, files, htmlContent) => {
-            files.forEach((file) => {
-                if (htmlContent) {
-                    // if there is htmlContent, stop manual insertion & let other extensions handle insertion via inputRule
-                    // you could extract the pasted file from this url string and upload it to a server for example
-                    console.log(htmlContent); // eslint-disable-line no-console
-                    return false;
-                }
+        fileReader.readAsDataURL(file);
+        fileReader.onload = () => {
+          currentEditor
+            .chain()
+            .insertContentAt(pos, {
+              type: "image",
+              attrs: {
+                src: fileReader.result,
+              },
+            })
+            .focus()
+            .run();
+        };
+      });
+    },
+    onPaste: (currentEditor, files, htmlContent) => {
+      files.forEach((file) => {
+        if (htmlContent) {
+          // if there is htmlContent, stop manual insertion & let other extensions handle insertion via inputRule
+          // you could extract the pasted file from this url string and upload it to a server for example
+          console.log(htmlContent); // eslint-disable-line no-console
+          return false;
+        }
 
-                const fileReader = new FileReader();
+        const fileReader = new FileReader();
 
-                fileReader.readAsDataURL(file);
-                fileReader.onload = () => {
-                    currentEditor
-                        .chain()
-                        .insertContentAt(currentEditor.state.selection.anchor, {
-                            type: "image",
-                            attrs: {
-                                src: fileReader.result,
-                            },
-                        })
-                        .focus()
-                        .run();
-                };
-            });
-        },
-    }),
-    Image.configure({
-        allowedMimeTypes: ["image/*"],
-        maxFileSize: 5 * 1024 * 1024,
-        allowBase64: true,
-        uploadFn: async (file) => {
-            // NOTE: This is a fake upload function. Replace this with your own upload logic.
-            // This function should return the uploaded image URL.
+        fileReader.readAsDataURL(file);
+        fileReader.onload = () => {
+          currentEditor
+            .chain()
+            .insertContentAt(currentEditor.state.selection.anchor, {
+              type: "image",
+              attrs: {
+                src: fileReader.result,
+              },
+            })
+            .focus()
+            .run();
+        };
+      });
+    },
+  }),
+  Image.configure({
+    allowedMimeTypes: ["image/*"],
+    maxFileSize: 5 * 1024 * 1024,
+    allowBase64: true,
+    uploadFn: async (file) => {
+      // NOTE: This is a fake upload function. Replace this with your own upload logic.
+      // This function should return the uploaded image URL.
 
-            // wait 3s to simulate upload
-            await new Promise((resolve) => setTimeout(resolve, 3000));
+      // wait 3s to simulate upload
+      await new Promise((resolve) => setTimeout(resolve, 3000));
 
-            const src = await fileToBase64(file);
+      const src = await fileToBase64(file);
 
-            // either return { id: string | number, src: string } or just src
-            // return src;
-            return { id: randomId(), src };
-        },
-        onImageRemoved({ id, src }) {
-            console.log("Image removed", { id, src });
-        },
-        onValidationError(errors) {
-            errors.forEach((error) => {
-                // toast.error('Image validation error', {
-                //     position: 'bottom-right',
-                //     description: error.reason
-                // })
-            });
-        },
-    }),
-    Highlight.configure({
-        multicolor: true,
-    }),
-    Table,
-    TableCell,
-    TableHeader,
-    TableRow,
-    Link.configure({
-        openOnClick: true,
-        autolink: true,
-        defaultProtocol: "https",
-    }),
-    TextAlign.configure({
-        types: ["heading", "paragraph"],
-    }),
-    Typography,
-    Color,
-    Placeholder.configure({
-        includeChildren: true,
-        showOnlyCurrent: false,
-        placeholder: () => "",
-    }),
-    SlashCommand,
+      // either return { id: string | number, src: string } or just src
+      // return src;
+      return { id: randomId(), src };
+    },
+    onImageRemoved({ id, src }) {
+      console.log("Image removed", { id, src });
+    },
+    onValidationError(errors) {
+      errors.forEach((error) => {
+        // toast.error('Image validation error', {
+        //     position: 'bottom-right',
+        //     description: error.reason
+        // })
+      });
+    },
+  }),
+  Highlight.configure({
+    multicolor: true,
+  }),
+  Table,
+  TableCell,
+  TableHeader,
+  TableRow,
+  Link.configure({
+    openOnClick: true,
+    autolink: true,
+    defaultProtocol: "https",
+  }),
+  TextAlign.configure({
+    types: ["heading", "paragraph"],
+  }),
+  Typography,
+  Color,
+  // Placeholder.configure({
+  //   includeChildren: true,
+  //   showOnlyCurrent: false,
+  //   placeholder: () => "",
+  // }),
+  SlashCommand,
 ];
 
 export const useBlockEditor = () => {
-    const editor = useEditor(
-        {
-            immediatelyRender: false,
-            // shouldRerenderOnTransaction: false,
-            autofocus: true,
-            onCreate: (ctx) => {
-                if (ctx.editor.isEmpty) {
-                    ctx.editor.commands.setContent(initialContent);
-                    ctx.editor.commands.focus("start", {
-                        scrollIntoView: true,
-                    });
-                }
-            },
-            extensions: [...extensions].filter(
-                (e): e is AnyExtension => e !== undefined
-            ),
-            editorProps: {
-                attributes: {
-                    autocomplete: "off",
-                    autocorrect: "off",
-                    autocapitalize: "off",
-                    class: "min-h-full prose prose-sm sm:prose-base lg:prose-lg xl:prose-2xl max-w-[1150px] mx-auto focus:outline-none border p-24 bg-white rounded-md shadow-md",
-                },
-            },
+  const editor = useEditor(
+    {
+      immediatelyRender: false,
+      // shouldRerenderOnTransaction: false,
+      autofocus: true,
+      onCreate: (ctx) => {
+        if (ctx.editor.isEmpty) {
+          ctx.editor.commands.setContent(initialContent);
+          ctx.editor.commands.focus("start", {
+            scrollIntoView: true,
+          });
+        }
+      },
+      extensions: [...extensions].filter(
+        (e): e is AnyExtension => e !== undefined
+      ),
+      editorProps: {
+        attributes: {
+          autocomplete: "off",
+          autocorrect: "off",
+          autocapitalize: "off",
+          class:
+            "min-h-[800px] shadow shadow-blue-100 prose min-w-[1050px] mx-auto focus:outline-none border p-[96px] mt-3 bg-white rounded-md shadow-md",
         },
-        []
-    );
-    useEffect(() => {
-        if (!editor) return;
-        window.editor = editor;
-        console.log("once");
-    }, []);
-    return { editor };
+      },
+    },
+    []
+  );
+  useEffect(() => {
+    if (!editor) return;
+    window.editor = editor;
+    console.log("once");
+  }, []);
+  return { editor };
 };

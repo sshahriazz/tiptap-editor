@@ -33,6 +33,16 @@ export const Columns = Node.create({
       },
     }
   },
+  addKeyboardShortcuts() {
+    return {
+        'Mod-t': () => this.editor
+        .chain()
+        .focus()
+        .setColumns()
+        .focus(this.editor.state.selection.head - 1)
+        .run(),
+    }
+},
 
   addCommands() {
     return {
