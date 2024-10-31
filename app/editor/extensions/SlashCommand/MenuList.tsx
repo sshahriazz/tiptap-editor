@@ -1,8 +1,8 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
-import { DropdownButton } from "../../components/Dropdown";
-import { Surface } from "../../components/Surface";
-import { Icon } from "../icon";
-import { Command, MenuListProps } from "./types";
+import React, {useCallback, useEffect, useRef, useState} from "react";
+import {DropdownButton} from "../../components/Dropdown";
+import {Surface} from "../../components/Surface";
+import {Icon} from "../Icon";
+import {Command, MenuListProps} from "./types";
 
 export const MenuList = React.forwardRef((props: MenuListProps, ref) => {
     const scrollContainer = useRef<HTMLDivElement>(null);
@@ -26,7 +26,7 @@ export const MenuList = React.forwardRef((props: MenuListProps, ref) => {
     );
 
     React.useImperativeHandle(ref, () => ({
-        onKeyDown: ({ event }: { event: React.KeyboardEvent }) => {
+        onKeyDown: ({event}: { event: React.KeyboardEvent }) => {
             if (event.key === "ArrowDown") {
                 if (!props.items.length) {
                     return false;

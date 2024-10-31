@@ -1,12 +1,12 @@
 import * as PopoverMenu from "@/app/editor/components/PopoverMenu";
-import { Toolbar } from "@/app/editor/components/Toolbar";
-import { Icon } from "@/app/editor/extensions/icon";
-import { Editor as CoreEditor } from "@tiptap/core";
-import { EditorState } from "@tiptap/pm/state";
-import { EditorView } from "@tiptap/pm/view";
-import { BubbleMenu as BaseBubbleMenu, Editor } from "@tiptap/react";
-import React, { useCallback } from "react";
-import { isRowGripSelected } from "./utils";
+import {Toolbar} from "@/app/editor/components/Toolbar";
+import {Icon} from "@/app/editor/extensions/Icon";
+import {Editor as CoreEditor} from "@tiptap/core";
+import {EditorState} from "@tiptap/pm/state";
+import {EditorView} from "@tiptap/pm/view";
+import {BubbleMenu as BaseBubbleMenu, Editor} from "@tiptap/react";
+import React, {useCallback} from "react";
+import {isRowGripSelected} from "./utils";
 
 interface MenuProps {
     editor: Editor;
@@ -24,14 +24,14 @@ interface ShouldShowProps {
 }
 
 export const TableRowMenu = React.memo(
-    ({ editor, appendTo }: MenuProps): JSX.Element => {
+    ({editor, appendTo}: MenuProps): JSX.Element => {
         const shouldShow = useCallback(
-            ({ view, state, from }: ShouldShowProps) => {
+            ({view, state, from}: ShouldShowProps) => {
                 if (!state || !from) {
                     return false;
                 }
 
-                return isRowGripSelected({ editor, view, state, from });
+                return isRowGripSelected({editor, view, state, from});
             },
             [editor]
         );
@@ -60,20 +60,20 @@ export const TableRowMenu = React.memo(
                     placement: "left",
                     offset: [0, 15],
                     popperOptions: {
-                        modifiers: [{ name: "flip", enabled: false }],
+                        modifiers: [{name: "flip", enabled: false}],
                     },
                 }}
                 shouldShow={shouldShow}
             >
                 <Toolbar.Wrapper isVertical>
                     <PopoverMenu.Item
-                        iconComponent={<Icon name="ArrowUpToLine" />}
+                        iconComponent={<Icon name="ArrowUpToLine"/>}
                         close={false}
                         label="Add row before"
                         onClick={onAddRowBefore}
                     />
                     <PopoverMenu.Item
-                        iconComponent={<Icon name="ArrowDownToLine" />}
+                        iconComponent={<Icon name="ArrowDownToLine"/>}
                         close={false}
                         label="Add row after"
                         onClick={onAddRowAfter}

@@ -19,10 +19,6 @@ import { Link } from "@tiptap/extension-link";
 import Mention from "@tiptap/extension-mention";
 import Subscript from "@tiptap/extension-subscript";
 import Superscript from "@tiptap/extension-superscript";
-import Table from "@tiptap/extension-table";
-import TableCell from "@tiptap/extension-table-cell";
-import TableHeader from "@tiptap/extension-table-header";
-import TableRow from "@tiptap/extension-table-row";
 import TaskItem from "@tiptap/extension-task-item";
 import TaskList from "@tiptap/extension-task-list";
 import TextAlign from "@tiptap/extension-text-align";
@@ -31,6 +27,7 @@ import Underline from "@tiptap/extension-underline";
 import StarterKit from "@tiptap/starter-kit";
 import { useEffect } from "react";
 import Document from "../extensions/Document/Document";
+import { Table, TableCell, TableHeader, TableRow } from "../extensions/Table";
 
 declare global {
     interface Window {
@@ -186,7 +183,7 @@ export const useBlockEditor = () => {
                     autocomplete: "off",
                     autocorrect: "off",
                     autocapitalize: "off",
-                    class: "min-h-full prose prose-sm sm:prose-base lg:prose-lg xl:prose-2xl max-w-[1150px] mx-auto focus:outline-none border p-24 bg-white rounded-md shadow-md",
+                    class: "min-h-[800px] shadow shadow-blue-100 prose min-w-[1050px] mx-auto focus:outline-none border p-[96px] mt-3 bg-white rounded-md shadow-md",
                 },
             },
         },

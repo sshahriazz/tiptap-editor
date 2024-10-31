@@ -1,18 +1,15 @@
-import { Editor, Extension } from "@tiptap/core";
-import { PluginKey } from "@tiptap/pm/state";
-import { ReactRenderer } from "@tiptap/react";
-import Suggestion, {
-    SuggestionKeyDownProps,
-    SuggestionProps,
-} from "@tiptap/suggestion";
+import {Editor, Extension} from "@tiptap/core";
+import {PluginKey} from "@tiptap/pm/state";
+import {ReactRenderer} from "@tiptap/react";
+import Suggestion, {SuggestionKeyDownProps, SuggestionProps,} from "@tiptap/suggestion";
 import tippy from "tippy.js";
 
-import { GROUPS } from "./groups";
-import { MenuList } from "./MenuList";
+import {GROUPS} from "./groups";
+import {MenuList} from "./MenuList";
 
 const extensionName = "slashCommand";
 
-let popup: unknown;
+let popup: any;
 
 export const SlashCommand = Extension.create({
     name: extensionName,
@@ -47,7 +44,7 @@ export const SlashCommand = Extension.create({
                 allowSpaces: true,
                 startOfLine: true,
                 pluginKey: new PluginKey(extensionName),
-                allow: ({ state, range }) => {
+                allow: ({state, range}) => {
                     const $from = state.doc.resolve(range.from);
                     const isRootDepth = $from.depth === 1;
                     const isParagraph = $from.parent.type.name === "paragraph";
@@ -68,21 +65,21 @@ export const SlashCommand = Extension.create({
                     );
                 },
                 command: ({
-                    editor,
-                    props,
-                }: {
+                              editor,
+                              props,
+                          }: {
                     editor: Editor;
                     props: any;
                 }) => {
-                    const { view, state } = editor;
-                    const { $head, $from } = view.state.selection;
+                    const {view, state} = editor;
+                    const {$head, $from} = view.state.selection;
 
                     const end = $from.pos;
                     const from = $head?.nodeBefore
                         ? end -
-                          ($head.nodeBefore.text?.substring(
-                              $head.nodeBefore.text?.indexOf("/")
-                          ).length ?? 0)
+                        ($head.nodeBefore.text?.substring(
+                            $head.nodeBefore.text?.indexOf("/")
+                        ).length ?? 0)
                         : $from.start();
 
                     const tr = state.tr.deleteRange(from, end);
@@ -91,7 +88,7 @@ export const SlashCommand = Extension.create({
                     props.action(editor);
                     view.focus();
                 },
-                items: ({ query }: { query: string }) => {
+                items: ({query}: { query: string }) => {
                     const withFilteredCommands = GROUPS.map((group) => ({
                         ...group,
                         commands: group.commands
@@ -160,7 +157,7 @@ export const SlashCommand = Extension.create({
                                 editor: props.editor,
                             });
 
-                            const { view } = props.editor;
+                            const {view} = props.editor;
 
                             const editorNode = view.dom as HTMLElement;
 
@@ -181,8 +178,8 @@ export const SlashCommand = Extension.create({
 
                                 if (
                                     rect.top +
-                                        component.element.offsetHeight +
-                                        40 >
+                                    component.element.offsetHeight +
+                                    40 >
                                     window.innerHeight
                                 ) {
                                     const diff =
@@ -227,7 +224,7 @@ export const SlashCommand = Extension.create({
                         onUpdate(props: SuggestionProps) {
                             component.updateProps(props);
 
-                            const { view } = props.editor;
+                            const {view} = props.editor;
 
                             const editorNode = view.dom as HTMLElement;
 
@@ -269,13 +266,13 @@ export const SlashCommand = Extension.create({
                                 props.clientRect
                                     ? getReferenceClientRect()
                                     : {
-                                          width: 0,
-                                          height: 0,
-                                          left: 0,
-                                          top: 0,
-                                          right: 0,
-                                          bottom: 0,
-                                      };
+                                        width: 0,
+                                        height: 0,
+                                        left: 0,
+                                        top: 0,
+                                        right: 0,
+                                        bottom: 0,
+                                    };
                             popup?.[0].setProps({
                                 getReferenceClientRect,
                             });
@@ -298,7 +295,7 @@ export const SlashCommand = Extension.create({
                         onExit(props) {
                             popup?.[0].hide();
                             if (scrollHandler) {
-                                const { view } = props.editor;
+                                const {view} = props.editor;
                                 view.dom.parentElement?.removeEventListener(
                                     "scroll",
                                     scrollHandler

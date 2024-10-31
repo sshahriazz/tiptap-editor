@@ -1,19 +1,20 @@
 import {
-  Button,
-  ButtonGroup,
-  Kbd,
-  Listbox,
-  ListboxItem,
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
+    Button,
+    ButtonGroup,
+    Kbd,
+    Listbox,
+    ListboxItem,
+    Popover,
+    PopoverContent,
+    PopoverTrigger,
+    Selection,
 } from "@nextui-org/react";
 import {ChevronDownIcon, ListIcon, ListOrderedIcon} from "lucide-react";
 import {useState} from "react";
 import ActionButton from "../ActionButton";
 
 const LIstItem = ({editor}: any) => {
-    const [selectedKeys, setSelectedKeys] = useState(new Set<string>());
+    const [selectedKeys, setSelectedKeys] = useState<Selection>(new Set([""]));
 
 
     return (

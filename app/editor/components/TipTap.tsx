@@ -14,27 +14,27 @@ import { default as BubbleMenuBar } from "./toolbar/BubbleMenuBar";
 // const MemorizedToC = React.memo(ToC);
 
 const Tiptap = () => {
-    const { editor } = useBlockEditor();
-    const menuContainerRef = useRef(null);
+  const { editor } = useBlockEditor();
+  const menuContainerRef = useRef(null);
 
-    if (!editor) {
-        return null;
-    }
+  if (!editor) {
+    return null;
+  }
 
-    return (
-        <div ref={menuContainerRef} className="w-full flex justify-between">
-            <div className="mx-auto flex flex-col">
-                <Toolbar editor={editor} />
-                <EditorContent editor={editor} />
-                <TableRowMenu editor={editor} appendTo={menuContainerRef} />
-                <TableColumnMenu editor={editor} appendTo={menuContainerRef} />
-                <BubbleMenu editor={editor} tippyOptions={{ duration: 100 }}>
-                    <BubbleMenuBar editor={editor} />
-                </BubbleMenu>
-                <ColumnsMenu editor={editor} appendTo={menuContainerRef} />
-            </div>
-        </div>
-    );
+  return (
+    <div ref={menuContainerRef} className="w-full flex justify-between mt-6">
+      <div className="mx-auto flex flex-col ">
+        <Toolbar editor={editor} />
+        <EditorContent editor={editor} />
+        <TableRowMenu editor={editor} appendTo={menuContainerRef} />
+        <TableColumnMenu editor={editor} appendTo={menuContainerRef} />
+        <BubbleMenu editor={editor} tippyOptions={{ duration: 100 }}>
+          <BubbleMenuBar editor={editor} />
+        </BubbleMenu>
+        <ColumnsMenu editor={editor} appendTo={menuContainerRef} />
+      </div>
+    </div>
+  );
 };
 
 export default Tiptap;

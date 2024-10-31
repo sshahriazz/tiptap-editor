@@ -1,11 +1,9 @@
-import {Button, Listbox, ListboxItem, Popover, PopoverContent, PopoverTrigger,} from "@nextui-org/react";
+import {Button, Listbox, ListboxItem, Popover, PopoverContent, PopoverTrigger, Selection,} from "@nextui-org/react";
 import React, {useState} from "react";
 import ActionButton from "../ActionButton";
 
 const FontFamily = ({editor}: any) => {
-
-    const [selectedKeys, setSelectedKeys] = useState(new Set<string>("Inter"));
-
+    const [selectedKeys, setSelectedKeys] = useState<Selection>(new Set(["Inter"]));
 
     const fonts = [
         {
@@ -63,7 +61,7 @@ const FontFamily = ({editor}: any) => {
                             contentForMac={<p>Font Family</p>}
                             contentForWindows={<p>Font Family</p>}
                         >
-                            <span className="text-sm">{selectedKeys}</span>
+                            <span className="text-xs">{selectedKeys}</span>
                         </ActionButton>
                     </Button>
                 </PopoverTrigger>

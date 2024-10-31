@@ -1,4 +1,4 @@
-import {Button, Listbox, ListboxItem, Popover, PopoverContent, PopoverTrigger,} from "@nextui-org/react";
+import {Button, Listbox, ListboxItem, Popover, PopoverContent, PopoverTrigger, Selection,} from "@nextui-org/react";
 import {Level} from "@tiptap/extension-heading";
 import {
   Heading1Icon,
@@ -22,8 +22,8 @@ const headingIconMapper: Record<string, ReactNode> = {
 };
 
 const Heading = ({editor}: any) => {
-    const [selectedKeys, setSelectedKeys] = useState(new Set<string>());
-
+    // console.log(editor.getAttributes("heading"));
+    const [selectedKeys, setSelectedKeys] = useState<Selection>(new Set(["H1"]));
 
     const handleHeadingChange = (level: Level) => {
         editor.chain().focus().setHeading({level}).run();
@@ -51,11 +51,13 @@ const Heading = ({editor}: any) => {
                         contentForMac={<p>Heading</p>}
                         contentForWindows={<p>Heading</p>}
                     >
-                        {editor.getAttributes("heading").level ? (
-                            headingIconMapper[`H${editor.getAttributes("heading").level}`]
-                        ) : (
-                            <HeadingIcon size={16}/>
-                        )}
+            <span className="text-xs">
+              {editor.getAttributes("heading").level ? (
+                  headingIconMapper[`H${editor.getAttributes("heading").level}`]
+              ) : (
+                  <HeadingIcon size={14} className="font-bold"/>
+              )}
+            </span>
                     </ActionButton>
                 </Button>
             </PopoverTrigger>
