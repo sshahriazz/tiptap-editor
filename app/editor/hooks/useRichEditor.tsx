@@ -1,44 +1,46 @@
-"use client";
+'use client'
 
-import type { AnyExtension, Editor } from "@tiptap/core";
-import { useEditor } from "@tiptap/react";
+import {useEditor} from '@tiptap/react'
+import type {AnyExtension, Editor} from '@tiptap/core'
 // import {initialContent} from '@/lib/data/initialContent'
-import { FontSize } from "@/app/editor/extensions/fontsize";
-import { Image } from "@/app/editor/extensions/image/Image";
-import { fileToBase64, randomId } from "@/app/editor/extensions/utils";
-import { FileHandler } from "@tiptap-pro/extension-file-handler";
-import CharacterCount from "@tiptap/extension-character-count";
-import FontFamily from "@tiptap/extension-font-family";
+import StarterKit from "@tiptap/starter-kit";
+import Underline from "@tiptap/extension-underline";
 import Highlight from "@tiptap/extension-highlight";
 import Mention from "@tiptap/extension-mention";
+import TaskList from "@tiptap/extension-task-list";
+import TaskItem from "@tiptap/extension-task-item";
+import {FontSize} from "@/app/editor/extensions/fontsize";
 import Subscript from "@tiptap/extension-subscript";
 import Superscript from "@tiptap/extension-superscript";
-import TaskItem from "@tiptap/extension-task-item";
-import TaskList from "@tiptap/extension-task-list";
-import Underline from "@tiptap/extension-underline";
-import StarterKit from "@tiptap/starter-kit";
-// import Table from "@tiptap/extension-table";
-// import TableCell from "@tiptap/extension-table-cell";
-// import TableHeader from "@tiptap/extension-table-header";
-// import TableRow from "@tiptap/extension-table-row";
-import { SlashCommand } from "@/app/editor/extensions/SlashCommand";
-import { initialContent } from "@/app/editor/lib/content";
-import { Color } from "@tiptap/extension-color";
-import { Link } from "@tiptap/extension-link";
-import Placeholder from "@tiptap/extension-placeholder";
+import FontFamily from "@tiptap/extension-font-family";
+import CharacterCount from "@tiptap/extension-character-count";
+import {FileHandler} from "@tiptap-pro/extension-file-handler";
+import {Image} from "@/app/editor/extensions/image/Image";
+import {fileToBase64, randomId} from "@/app/editor/extensions/utils";
+import Table from "@tiptap/extension-table";
+import TableCell from "@tiptap/extension-table-cell";
+import TableHeader from "@tiptap/extension-table-header";
+import TableRow from "@tiptap/extension-table-row";
+import {Link} from "@tiptap/extension-link";
 import TextAlign from "@tiptap/extension-text-align";
 import Typography from "@tiptap/extension-typography";
-import { useEffect } from "react";
-import { Table, TableCell, TableHeader, TableRow } from "../extensions/Table";
+import {Color} from "@tiptap/extension-color";
+import Placeholder from "@tiptap/extension-placeholder";
+import {SlashCommand} from "@/app/editor/extensions/SlashCommand";
+import {initialContent} from "@/app/editor/lib/content";
+import {useEffect} from "react";
+import Columns from "@/app/editor/extensions/multi-column/Columns";
+import Column from "@/app/editor/extensions/multi-column/Column";
 
 declare global {
     interface Window {
-        editor: Editor | null;
+        editor: Editor | null
     }
 }
 
 const extensions = [
     StarterKit,
+    Columns,
     Underline,
     // Highlight.configure({
     //     multicolor: true,
@@ -50,6 +52,7 @@ const extensions = [
         //suggestion,
     }),
     TaskList,
+    Column,
     TaskItem.configure({
         nested: true,
     }),
@@ -60,12 +63,7 @@ const extensions = [
     FontFamily,
     CharacterCount,
     FileHandler.configure({
-        allowedMimeTypes: [
-            "image/png",
-            "image/jpeg",
-            "image/gif",
-            "image/webp",
-        ],
+        allowedMimeTypes: ["image/png", "image/jpeg", "image/gif", "image/webp"],
         onDrop: (currentEditor, files, pos) => {
             files.forEach((file) => {
                 const fileReader = new FileReader();
@@ -127,10 +125,10 @@ const extensions = [
 
             // either return { id: string | number, src: string } or just src
             // return src;
-            return { id: randomId(), src };
+            return {id: randomId(), src};
         },
-        onImageRemoved({ id, src }) {
-            console.log("Image removed", { id, src });
+        onImageRemoved({id, src}) {
+            console.log("Image removed", {id, src});
         },
         onValidationError(errors) {
             errors.forEach((error) => {
@@ -172,32 +170,30 @@ export const useBlockEditor = () => {
             immediatelyRender: false,
             // shouldRerenderOnTransaction: false,
             autofocus: true,
-            onCreate: (ctx) => {
+            onCreate: ctx => {
                 if (ctx.editor.isEmpty) {
-                    ctx.editor.commands.setContent(initialContent);
-                    ctx.editor.commands.focus("start", {
-                        scrollIntoView: true,
-                    });
+                    ctx.editor.commands.setContent(initialContent)
+                    ctx.editor.commands.focus('start', {scrollIntoView: true})
                 }
             },
-            extensions: [...extensions].filter(
-                (e): e is AnyExtension => e !== undefined
-            ),
+            extensions: [
+                ...extensions,
+            ].filter((e): e is AnyExtension => e !== undefined),
             editorProps: {
                 attributes: {
-                    autocomplete: "off",
-                    autocorrect: "off",
-                    autocapitalize: "off",
-                    class: "min-h-full prose prose-sm sm:prose-base lg:prose-lg xl:prose-2xl max-w-[1150px] mx-auto focus:outline-none border p-24 bg-white rounded-md shadow-md",
+                    autocomplete: 'off',
+                    autocorrect: 'off',
+                    autocapitalize: 'off',
+                    class: 'min-h-full prose prose-sm sm:prose-base lg:prose-lg xl:prose-2xl max-w-[1150px] mx-auto focus:outline-none border p-24 bg-white rounded-md shadow-md',
                 },
             },
         },
-        []
-    );
+        [],
+    )
     useEffect(() => {
-        if (!editor) return;
-        window.editor = editor;
-        console.log("once");
+        if (!editor) return
+        window.editor = editor
+        console.log("once")
     }, []);
-    return { editor };
-};
+    return {editor}
+}
