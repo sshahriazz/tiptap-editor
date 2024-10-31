@@ -17,7 +17,6 @@ import FontFamily from "@tiptap/extension-font-family";
 import Highlight from "@tiptap/extension-highlight";
 import { Link } from "@tiptap/extension-link";
 import Mention from "@tiptap/extension-mention";
-import Placeholder from "@tiptap/extension-placeholder";
 import Subscript from "@tiptap/extension-subscript";
 import Superscript from "@tiptap/extension-superscript";
 import Table from "@tiptap/extension-table";
@@ -161,11 +160,7 @@ const extensions = [
     }),
     Typography,
     Color,
-    Placeholder.configure({
-        includeChildren: true,
-        showOnlyCurrent: false,
-        placeholder: () => "",
-    }),
+
     SlashCommand,
 ];
 
