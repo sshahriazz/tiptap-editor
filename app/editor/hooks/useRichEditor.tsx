@@ -20,6 +20,7 @@ import {fileToBase64, randomId} from "@/app/editor/extensions/utils";
 import Table from "@tiptap/extension-table";
 import TableCell from "@tiptap/extension-table-cell";
 import TableHeader from "@tiptap/extension-table-header";
+import Document from "../extensions/Document/Document"
 import TableRow from "@tiptap/extension-table-row";
 import {Link} from "@tiptap/extension-link";
 import TextAlign from "@tiptap/extension-text-align";
@@ -39,12 +40,12 @@ declare global {
 }
 
 const extensions = [
-    StarterKit,
+    Document,
+    StarterKit.configure({
+        document: false,
+    }),
     Columns,
     Underline,
-    // Highlight.configure({
-    //     multicolor: true,
-    // }),
     Mention.configure({
         HTMLAttributes: {
             class: "mention",
@@ -56,7 +57,6 @@ const extensions = [
     TaskItem.configure({
         nested: true,
     }),
-
     FontSize,
     Subscript,
     Superscript,

@@ -36,6 +36,24 @@ const Toolbar = ({editor}: any) => {
                     .run()}>
                     Col
                 </Button>
+                <button
+                    onClick={() => editor.chain().focus().toggleBlockquote().run()}
+                    className={editor.isActive('blockquote') ? 'is-active' : ''}
+                >
+                    Toggle blockquote
+                </button>
+                <button
+                    onClick={() => editor.chain().focus().setBlockquote().run()}
+                    disabled={!editor.can().setBlockquote()}
+                >
+                    Set blockquote
+                </button>
+                <button
+                    onClick={() => editor.chain().focus().unsetBlockquote().run()}
+                    disabled={!editor.can().unsetBlockquote()}
+                >
+                    Unset blockquote
+                </button>
 
                 <UndoRedo editor={editor}/>
                 <FontStyle editor={editor}/>
