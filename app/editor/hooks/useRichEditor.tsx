@@ -164,7 +164,7 @@ export const useBlockEditor = () => {
     const editor = useEditor(
         {
             immediatelyRender: false,
-            shouldRerenderOnTransaction: false,
+            // shouldRerenderOnTransaction: false,
             autofocus: true,
             onCreate: ctx => {
                 if (ctx.editor.isEmpty) {
