@@ -29,6 +29,8 @@ import Placeholder from "@tiptap/extension-placeholder";
 import {SlashCommand} from "@/app/editor/extensions/SlashCommand";
 import {initialContent} from "@/app/editor/lib/content";
 import {useEffect} from "react";
+import Columns from "@/app/editor/extensions/multi-column/Columns";
+import Column from "@/app/editor/extensions/multi-column/Column";
 
 declare global {
     interface Window {
@@ -38,6 +40,7 @@ declare global {
 
 const extensions = [
     StarterKit,
+    Columns,
     Underline,
     // Highlight.configure({
     //     multicolor: true,
@@ -49,6 +52,7 @@ const extensions = [
         //suggestion,
     }),
     TaskList,
+    Column,
     TaskItem.configure({
         nested: true,
     }),

@@ -24,10 +24,19 @@ const Toolbar = ({editor}: any) => {
     // }
 
     // console.log(editor.getJSON(), "getjosn");
-
+    // isDisabled={() => editor.isActive('columns')}
     return (
         <Card className={"sticky top-0 z-50 mt-3 w-fit mx-auto mb-4"}>
             <CardBody className={"flex-row gap-3 shadow-sm"}>
+                <Button onPress={() => editor
+                    .chain()
+                    .focus()
+                    .setColumns()
+                    .focus(editor.state.selection.head - 1)
+                    .run()}>
+                    Col
+                </Button>
+
                 <UndoRedo editor={editor}/>
                 <FontStyle editor={editor}/>
                 <Heading editor={editor}/>
