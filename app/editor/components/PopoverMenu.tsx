@@ -1,9 +1,12 @@
-import { Popover, PopoverContent, PopoverTrigger } from "@nextui-org/react";
+import * as Popover from "@radix-ui/react-popover";
 import { icons } from "lucide-react";
 import { forwardRef } from "react";
 import { cn } from "../lib/utils";
 import { Surface } from "./Surface";
 import { Toolbar } from "./Toolbar";
+
+export const Trigger = Popover.Trigger;
+export const Portal = Popover.Portal;
 
 export type MenuProps = {
     children: React.ReactNode;
@@ -25,38 +28,39 @@ export const Menu = ({
     isOpen,
     withPortal,
     tooltip,
+    onOpenChange,
 }: MenuProps) => {
     return (
-        <Popover>
+        <Popover.Root onOpenChange={onOpenChange}>
             {customTrigger ? (
-                <PopoverTrigger>{trigger}</PopoverTrigger>
+                <Trigger asChild>{trigger}</Trigger>
             ) : (
-                <PopoverTrigger>
+                <Trigger asChild>
                     <Toolbar.Button
                         className={triggerClassName}
                         tooltip={!isOpen ? tooltip : ""}
                     >
                         {trigger}
                     </Toolbar.Button>
-                </PopoverTrigger>
+                </Trigger>
             )}
             {withPortal ? (
                 // @ts-ignore
-                <PopoverContent className="z-9999">
-                    <PopoverContent>
+                <Popover.Portal className="z-9999">
+                    <Popover.Content asChild sideOffset={8}>
                         <Surface className="min-w-[15rem] p-2 flex flex-col gap-0.5 max-h-80 overflow-auto z-[9999]">
                             {children}
                         </Surface>
-                    </PopoverContent>
-                </PopoverContent>
+                    </Popover.Content>
+                </Popover.Portal>
             ) : (
-                <PopoverContent>
+                <Popover.Content asChild sideOffset={8}>
                     <Surface className="min-w-[15rem] p-2 flex flex-col gap-0.5 max-h-80 overflow-auto z-[9999]">
                         {children}
                     </Surface>
-                </PopoverContent>
+                </Popover.Content>
             )}
-        </Popover>
+        </Popover.Root>
     );
 };
 
