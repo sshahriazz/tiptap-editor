@@ -1,8 +1,21 @@
-import { Button, ButtonGroup } from "@nextui-org/react";
+import {
+    Button,
+    ButtonGroup,
+    Popover,
+    PopoverContent,
+    PopoverTrigger,
+} from "@nextui-org/react";
 import { Table } from "lucide-react";
+import { useState } from "react";
 import ActionButton from "../ActionButton";
 
 const TableMenu = ({ editor }: any) => {
+    const [row, setRow] = useState(null);
+    const [column, setColumn] = useState(null);
+    const handleSelectRowAndColumn = (row: number, column: number) => {
+        setRow(row);
+        setColumn(column);
+    };
     return (
         <ButtonGroup>
             <Button
@@ -24,6 +37,27 @@ const TableMenu = ({ editor }: any) => {
                     <Table size={16} />
                 </ActionButton>
             </Button>
+            <Popover>
+                <PopoverTrigger>
+                    <Button variant="flat" size="sm">
+                        Click me
+                    </Button>
+                </PopoverTrigger>
+                <PopoverContent>
+                    <div>
+                        <button
+                            onClick={() => handleSelectRowAndColumn()}
+                        ></button>
+                        <button></button>
+                        <button></button>
+                        <button></button>
+                        <button></button>
+                        <button></button>
+                        <button></button>
+                        <button></button>
+                    </div>
+                </PopoverContent>
+            </Popover>
         </ButtonGroup>
     );
 };
