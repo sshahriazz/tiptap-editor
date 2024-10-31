@@ -25,11 +25,7 @@ export default function FontSize({ editor }: any) {
   };
 
   const updateFontSize = useCallback((newSize: number) => {
-    let validSize;
-
-    if (newSize >= 10 && newSize <= 99) validSize = Math.max(10, newSize);
-    else if (newSize < 10) validSize = Math.min(10, newSize);
-    else validSize = 16;
+    const validSize = Math.max(10, Math.min(newSize, 99));
 
     setInputValue(validSize.toString());
     setIsValid(true);
@@ -37,15 +33,14 @@ export default function FontSize({ editor }: any) {
 
   const changeFontSize = (delta: number) => {
     const currentFontSize = parseInput(getFontSize());
-    const size = isNaN(currentFontSize)
-      ? parseInput(inputValue)
-      : currentFontSize;
+    const size = currentFontSize ? parseInput(inputValue) : currentFontSize;
 
     if (!isNaN(size)) {
       const newSize = size + delta;
       updateFontSize(newSize);
-      editor.chain().focus().setFontSize(newSize).run();
-    }
+    } else updateFontSize(size);
+
+    editor.chain().focus().setFontSize(inputValue).run();
   };
 
   const handleInputChange = (
