@@ -1,6 +1,6 @@
-import { icons } from "lucide-react";
-import { memo } from "react";
-import { cn } from "../lib/utils";
+import {icons} from "lucide-react";
+import {memo} from "react";
+import {cn} from "../lib/utils";
 
 export type IconProps = {
     name: keyof typeof icons;
@@ -8,7 +8,7 @@ export type IconProps = {
     strokeWidth?: number;
 };
 
-export const Icon = memo(({ name, className, strokeWidth }: IconProps) => {
+export const Icon = memo(({name, className, strokeWidth}: IconProps) => {
     const IconComponent = icons[name];
 
     if (!IconComponent) {
@@ -22,5 +22,7 @@ export const Icon = memo(({ name, className, strokeWidth }: IconProps) => {
         />
     );
 });
-
 Icon.displayName = "Icon";
+
+export default Icon;
+

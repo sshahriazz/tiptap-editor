@@ -1,4 +1,4 @@
-import { Group } from "./types";
+import {Group} from "./types";
 
 export const GROUPS: Group[] = [
     {
@@ -12,7 +12,7 @@ export const GROUPS: Group[] = [
                 description: "High priority section title",
                 aliases: ["h1"],
                 action: (editor) => {
-                    editor.chain().focus().setHeading({ level: 1 }).run();
+                    editor.chain().focus().setHeading({level: 1}).run();
                 },
             },
             {
@@ -22,7 +22,7 @@ export const GROUPS: Group[] = [
                 description: "Medium priority section title",
                 aliases: ["h2"],
                 action: (editor) => {
-                    editor.chain().focus().setHeading({ level: 2 }).run();
+                    editor.chain().focus().setHeading({level: 2}).run();
                 },
             },
             {
@@ -32,7 +32,7 @@ export const GROUPS: Group[] = [
                 description: "Low priority section title",
                 aliases: ["h3"],
                 action: (editor) => {
-                    editor.chain().focus().setHeading({ level: 3 }).run();
+                    editor.chain().focus().setHeading({level: 3}).run();
                 },
             },
             {
@@ -65,16 +65,7 @@ export const GROUPS: Group[] = [
                     editor.chain().focus().toggleTaskList().run();
                 },
             },
-            {
-                name: "toggleList",
-                label: "Toggle List",
-                iconName: "ListCollapse",
-                description: "Toggles can show and hide content",
-                aliases: ["toggle"],
-                action: (editor) => {
-                    editor.chain().focus().setDetails().run();
-                },
-            },
+
             {
                 name: "blockquote",
                 label: "Blockquote",
@@ -110,7 +101,7 @@ export const GROUPS: Group[] = [
                     editor
                         .chain()
                         .focus()
-                        .insertTable({ rows: 3, cols: 3, withHeaderRow: false })
+                        .insertTable({rows: 3, cols: 3, withHeaderRow: false})
                         .run();
                 },
             },
