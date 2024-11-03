@@ -20,6 +20,7 @@ import {
   ArrowUpToLine,
   Trash,
 } from "lucide-react";
+import ActionButton from "@/app/editor/components/ActionButton";
 
 interface MenuProps {
   editor: Editor;
@@ -82,47 +83,54 @@ export const TableColumnMenu = React.memo(
         }}
         shouldShow={shouldShow}
       >
-        <Popover className="border-0">
-          <PopoverTrigger>
-            <Button variant="flat" size="sm">
-              Edit Column
-            </Button>
-          </PopoverTrigger>
-          <PopoverContent className="p-0 border-0">
-            <Card style={{ width: "200px" }}>
-              <CardBody className="flex flex-col gap-3">
-                <Button
-                  startContent={<ArrowLeftToLine size={14} />}
-                  variant="flat"
-                  size="sm"
-                  className="flex justify-start"
-                  onPress={onAddColumnBefore}
+        <div className="relative">
+          <div className={`absolute bottom-0 -left-[70px] `}>
+            <Card>
+              <CardBody className="flex flex-row  gap-3">
+                <ActionButton
+                  contentForMac={<p>Insert column before</p>}
+                  contentForWindows={<p>Insert column before</p>}
                 >
-                  Insert column before
-                </Button>
-                <Button
-                  startContent={<ArrowRightToLine size={14} />}
-                  variant="flat"
-                  size="sm"
-                  className="flex justify-start"
-                  onPress={onAddColumnAfter}
+                  <Button
+                    variant="flat"
+                    size="sm"
+                    isIconOnly
+                    onPress={onAddColumnBefore}
+                  >
+                    <ArrowLeftToLine size={14} />
+                  </Button>
+                </ActionButton>
+                <ActionButton
+                  contentForMac={<p> Insert column after</p>}
+                  contentForWindows={<p> Insert column after</p>}
                 >
-                  Insert column after
-                </Button>
-                <Button
-                  startContent={<Trash size={14} />}
-                  variant="flat"
-                  size="sm"
-                  color="danger"
-                  className="flex justify-start"
-                  onPress={onDeleteColumn}
+                  <Button
+                    variant="flat"
+                    size="sm"
+                    isIconOnly
+                    onPress={onAddColumnAfter}
+                  >
+                    <ArrowRightToLine size={14} />
+                  </Button>
+                </ActionButton>
+                <ActionButton
+                  contentForMac={<p> Delete column</p>}
+                  contentForWindows={<p> Delete column</p>}
                 >
-                  Delete column
-                </Button>
+                  <Button
+                    variant="flat"
+                    size="sm"
+                    color="danger"
+                    isIconOnly
+                    onPress={onDeleteColumn}
+                  >
+                    <Trash size={14} />
+                  </Button>
+                </ActionButton>
               </CardBody>
             </Card>
-          </PopoverContent>
-        </Popover>
+          </div>
+        </div>
       </BaseBubbleMenu>
     );
   }
