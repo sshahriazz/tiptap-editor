@@ -13,6 +13,7 @@ import { BubbleMenu as BaseBubbleMenu, Editor } from "@tiptap/react";
 import React, { useCallback } from "react";
 import { isRowGripSelected } from "./utils";
 import { ArrowDownToLine, ArrowUpToLine, Trash } from "lucide-react";
+import ActionButton from "@/app/editor/components/ActionButton";
 
 interface MenuProps {
   editor: Editor;
@@ -71,47 +72,54 @@ export const TableRowMenu = React.memo(
         }}
         shouldShow={shouldShow}
       >
-        <Popover className="p-0 border-none">
-          <PopoverTrigger>
-            <Button variant="flat" size="sm">
-              Edit Row
-            </Button>
-          </PopoverTrigger>
-          <PopoverContent className="p-0">
-            <Card style={{ width: "200px" }}>
-              <CardBody className="flex flex-col gap-3">
-                <Button
-                  startContent={<ArrowUpToLine size={14} />}
-                  variant="flat"
-                  size="sm"
-                  className="flex justify-start"
-                  onPress={onAddRowBefore}
+        <div className="relative">
+          <div className={`absolute -top-[64px] -left-[65px] `}>
+            <Card>
+              <CardBody className="flex flex-col  gap-3">
+                <ActionButton
+                  contentForMac={<p>Insert row above</p>}
+                  contentForWindows={<p>Insert row above</p>}
                 >
-                  Insert row above
-                </Button>
-                <Button
-                  startContent={<ArrowDownToLine size={14} />}
-                  variant="flat"
-                  size="sm"
-                  className="flex justify-start"
-                  onPress={onAddRowAfter}
+                  <Button
+                    variant="flat"
+                    size="sm"
+                    isIconOnly
+                    onPress={onAddRowBefore}
+                  >
+                    <ArrowUpToLine size={14} />
+                  </Button>
+                </ActionButton>
+                <ActionButton
+                  contentForMac={<p>Insert row below</p>}
+                  contentForWindows={<p>Insert row below</p>}
                 >
-                  Insert row below
-                </Button>
-                <Button
-                  startContent={<Trash size={14} />}
-                  variant="flat"
-                  size="sm"
-                  color="danger"
-                  className="flex justify-start"
-                  onPress={onDeleteRow}
+                  <Button
+                    variant="flat"
+                    size="sm"
+                    isIconOnly
+                    onPress={onAddRowAfter}
+                  >
+                    <ArrowDownToLine size={14} />
+                  </Button>
+                </ActionButton>
+                <ActionButton
+                  contentForMac={<p>Delete row</p>}
+                  contentForWindows={<p>Delete row</p>}
                 >
-                  Delete row
-                </Button>
+                  <Button
+                    variant="flat"
+                    size="sm"
+                    isIconOnly
+                    color="danger"
+                    onPress={onDeleteRow}
+                  >
+                    <Trash size={14} />
+                  </Button>
+                </ActionButton>
               </CardBody>
             </Card>
-          </PopoverContent>
-        </Popover>
+          </div>
+        </div>
       </BaseBubbleMenu>
     );
   }

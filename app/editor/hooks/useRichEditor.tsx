@@ -188,6 +188,6 @@ export const useBlockEditor = () => {
     if (!editor) return;
     window.editor = editor;
     console.log("once");
-  }, []);
+  }, [editor]);
   return { editor };
 };
