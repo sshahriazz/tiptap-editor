@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/alt-text */
 import ImageEditBlock from "@/app/editor/components/image/ImageEditBlock";
 import {
   Button,
