@@ -12,15 +12,6 @@ import type { Editor } from "@tiptap/react";
 import { Image } from "lucide-react";
 import { useState } from "react";
 import ActionButton from "../ActionButton";
-// import {
-//     Dialog,
-//     DialogContent,
-//     DialogHeader,
-//     DialogDescription,
-//     DialogTitle,
-//     DialogTrigger
-// } from '@/components/ui/dialog'
-// import { ImageEditBlock } from './image-edit-block'
 
 interface ImageEditDialogProps {
   editor: Editor;

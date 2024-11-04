@@ -1,10 +1,7 @@
 import * as React from "react";
 import type { Editor } from "@tiptap/react";
 import { Button, Input } from "@nextui-org/react";
-import { ArrowUpFromLine, SquareCheck } from "lucide-react";
-// import { Button } from '@/components/ui/button'
-// import { Label } from '@/components/ui/label'
-// import { Input } from '@/components/ui/input'
+import { ArrowUpFromLine } from "lucide-react";
 
 interface ImageEditBlockProps {
   editor: Editor;
